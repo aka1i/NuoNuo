@@ -13,10 +13,15 @@ open class BaseActivity : AppCompatActivity()  {
         initImmersionBar()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
     open protected fun initImmersionBar() {
         //在BaseActivity里初始化
         immersionBar = ImmersionBar.with(this)
-        immersionBar.init()
+        immersionBar
+            .init()
     }
 
 

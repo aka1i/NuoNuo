@@ -2,10 +2,8 @@ import com.example.mykotlin.base.Preference
 import com.example.nuonuo.marco.Constant
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import top.jowanxu.wanandroidclient.base.Preference
 import java.util.concurrent.TimeUnit
 
 object RetrofitHelper {

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/register_bg"
+    tools:context=".ui.activity.FirstActivity">
+    <ImageView
+        android:id="@+id/nuo_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/nuo"/>
+
+    <TextView
+        android:id="@+id/nuo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/nuo_img"
+        android:layout_marginTop="20dp"
+        android:text="世界很美，而你正好有空"
+        android:textSize="18sp"
+        android:textColor="@color/white" />
+
+
+
+    <RelativeLayout
+        android:id="@+id/register_rl"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/nuo_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp">
+
+        <View
+            android:background="@drawable/register_button_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </View>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:text="注册"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_rl"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已有账号？"
+            android:textColor="@color/black"
+            android:alpha="0.5"
+            android:textSize="12sp"/>
+        <TextView
+            android:id="@+id/goToRegisterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点此登入"
+            android:textSize="12sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</RelativeLayout>
