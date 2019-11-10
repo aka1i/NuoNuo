@@ -60,8 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="已有账号？"
-            android:textColor="@color/black"
-            android:alpha="0.5"
+            android:textColor="@color/grey"
             android:textSize="12sp"/>
         <TextView
             android:id="@+id/goToRegisterText"

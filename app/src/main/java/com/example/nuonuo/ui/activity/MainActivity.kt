@@ -28,7 +28,7 @@ class MainActivity : BaseActivity() {
         adapter.addFragment(MessageFragment())
         adapter.addFragment(MineFragment())
         viewPager.adapter = adapter
-
+        viewPager.isScrollble = false
         bottom_navigation.setOnNavigationItemSelectedListener{ menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home -> viewPager.currentItem = 0
