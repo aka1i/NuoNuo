@@ -1,14 +1,18 @@
 package com.example.nuonuo.ui.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.example.mykotlin.base.BaseActivity
 import com.example.nuonuo.R
+import com.example.nuonuo.bean.RegisterResponse
+import com.example.nuonuo.presenter.RegisterPresenterImpl
+import com.example.nuonuo.view.RegisterView
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,4 +30,5 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             }
         }
     }
+
 }

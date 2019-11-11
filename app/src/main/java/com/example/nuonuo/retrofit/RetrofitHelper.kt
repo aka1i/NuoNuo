@@ -1,10 +1,19 @@
-import com.example.mykotlin.base.Preference
+
 import com.example.nuonuo.marco.Constant
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
+import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import okhttp3.MediaType
+import android.util.Log
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import org.json.JSONException
+import okio.Buffer
+import java.io.IOException
+import java.nio.charset.Charset
+
 
 object RetrofitHelper {
     private const val TAG = "RetrofitHelper"
@@ -28,6 +37,32 @@ object RetrofitHelper {
             connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
             // get response cookie
+            addInterceptor {
+                val request = it
+                    .request()
+                    .newBuilder()
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Accept"," application/json")
+                    .build()
+                val response = it.proceed(request)
+                Log.d(TAG, request.url().host())
+                Log.d(TAG, request.url().encodedPath())
+                Log.d(TAG, request.method())
+                try {
+                    val sink = Buffer()
+                    request.body()!!.writeTo(sink)
+                    val json = sink.readString(Charset.defaultCharset())
+                    val jsonObject = JSONObject(json)
+                    Log.d(TAG, json)
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+
+
+                response
+            }
         }
 
         return RetrofitBuild(
@@ -42,6 +77,10 @@ object RetrofitHelper {
      * get ServiceApi
      */
     private fun <T> getService(url: String, service: Class<T>): T = create(url).create(service)
+
+    public fun getRequestBodyByJson(json:JSONObject): RequestBody{
+        return RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json.toString())
+    }
 
 }
 

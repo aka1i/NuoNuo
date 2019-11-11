@@ -27,6 +27,7 @@ class FirstActivity : BaseActivity(), View.OnClickListener{
             }
             R.id.register_rl ->{
                 startActivity(Intent(this,RegisterActivity::class.java))
+                finish()
             }
         }
     }

@@ -31,10 +31,18 @@ class MainActivity : BaseActivity() {
         viewPager.isScrollble = false
         bottom_navigation.setOnNavigationItemSelectedListener{ menuItem ->
             when (menuItem.itemId) {
-                R.id.navigation_home -> viewPager.currentItem = 0
-                R.id.navigation_find -> viewPager.currentItem = 1
-                R.id.navigation_order -> viewPager.currentItem = 2
-                R.id.navigation_mine -> viewPager.currentItem = 3
+                R.id.navigation_home ->{
+                    viewPager.setCurrentItem(0,false)
+                }
+                R.id.navigation_find -> {
+                    viewPager.setCurrentItem(1,false)
+                }
+                R.id.navigation_order -> {
+                    viewPager.setCurrentItem(2,false)
+                }
+                R.id.navigation_mine -> {
+                    viewPager.setCurrentItem(3,false)
+                }
             }
             true
         }

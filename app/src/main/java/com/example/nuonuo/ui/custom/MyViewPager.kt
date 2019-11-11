@@ -5,6 +5,9 @@ import android.util.AttributeSet
 import androidx.viewpager.widget.ViewPager
 import android.view.MotionEvent
 import kotlin.math.abs
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 
 /**
@@ -56,4 +59,6 @@ class MyViewPager : ViewPager {
 
         return super.onInterceptTouchEvent(ev)
     }
+
+
 }

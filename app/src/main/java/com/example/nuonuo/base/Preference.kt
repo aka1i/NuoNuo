@@ -44,7 +44,6 @@ class Preference<T>(private val name: String,private val default: T) : ReadWrite
 
 
     private fun <U> putPreference(name: String, value: U) = with(preferences.edit()) {
-        Log.d("123123",value as String)
         when (value) {
             is Long -> putLong(name, value)
             is String -> putString(name, value)

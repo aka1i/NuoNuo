@@ -46,9 +46,6 @@ class MessageFragment : Fragment() {
     private fun initTab() {
         tabLayout.setupWithViewPager(viewPager)
         for (i in titleText.indices) {
-            Log.d("12321321321",i.toString())
-            Log.d("12321321321",titleText[i])
-            Log.d("12321321321",resources.getDrawable(icons[i]).toString())
             val v = LayoutInflater.from(activity).inflate(R.layout.tab_item, null)
             v.tab_text.text = titleText[i]
             v.tab_icon.setImageDrawable(resources.getDrawable(icons[i]))
