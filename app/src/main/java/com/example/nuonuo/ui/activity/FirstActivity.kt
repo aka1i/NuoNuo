@@ -1,18 +1,24 @@
 package com.example.nuonuo.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.mykotlin.base.BaseActivity
+import com.example.mykotlin.base.Preference
 import com.example.nuonuo.R
 import kotlinx.android.synthetic.main.activity_first.*
 
 class FirstActivity : BaseActivity(), View.OnClickListener{
-
+    companion object {
+        const val START_REGISTER = 0
+        const val START_LOGIN = 1
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_first)
         init()
+        Preference.setContext(applicationContext)
     }
 
     fun init(){
@@ -27,7 +33,20 @@ class FirstActivity : BaseActivity(), View.OnClickListener{
             }
             R.id.register_rl ->{
                 startActivity(Intent(this,RegisterActivity::class.java))
-                finish()
+            }
+        }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            START_REGISTER -> {
+                when (resultCode) {
+                    RESULT_OK -> {
+                        finish()
+                    }
+                }
             }
         }
     }

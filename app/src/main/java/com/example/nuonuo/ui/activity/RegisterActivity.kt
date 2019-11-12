@@ -1,6 +1,7 @@
 package com.example.nuonuo.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -62,6 +63,9 @@ class RegisterActivity : BaseActivity(), RegisterView,View.OnClickListener{
 
     override fun registerSuccess(result: RegisterResponse) {
         Toast.makeText(this,result.message, Toast.LENGTH_SHORT).show()
+//        startActivity(Intent(this,MainActivity::class.java))
+//        setResult(RESULT_OK)
+        finish()
     }
 
     override fun registerFailed(errorMessage: String?) {

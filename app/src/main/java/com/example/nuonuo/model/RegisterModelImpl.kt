@@ -1,7 +1,5 @@
 package com.example.nuonuo.model
 
-import android.util.Log
-import com.example.nuonuo.base.BaseModel
 import com.example.nuonuo.bean.RegisterResponse
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.RegisterPresenter
