@@ -59,7 +59,6 @@ class LoginActivity : BaseActivity(),LoginView, View.OnClickListener {
     }
 
     override fun loginSuccess(result: LoginResponse) {
-        Log.d("loginSuccess",result.toString())
         uid = result.data.uid
         accessToken = result.data.accessToken
         phone = result.data.phone
