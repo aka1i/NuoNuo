@@ -51,6 +51,7 @@ class LoginActivity : BaseActivity(),LoginView, View.OnClickListener {
 
     fun init(){
         login_btn.setOnClickListener(this)
+        forgotPasswordTextView.setOnClickListener(this)
     }
 
 
@@ -89,6 +90,9 @@ class LoginActivity : BaseActivity(),LoginView, View.OnClickListener {
                         loginPresenterImpl.login(username,password)
                     }
                 }
+            }
+            R.id.forgotPasswordTextView -> {
+                startActivity(Intent(this,ForgotPasswordActivity::class.java))
             }
         }
     }

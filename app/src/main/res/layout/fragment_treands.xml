@@ -1,81 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.TreandsFragment">
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/trends_bg"/>
+      <RelativeLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_centerInParent="true">
+          <ImageView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:scaleType="fitXY"
+              android:src="@drawable/trends_bg"/>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:src="@drawable/head_img"/>
+          <LinearLayout
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:layout_centerInParent="true">
 
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="25dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:text="Akai1"
-                    android:textColor="@color/white" />
+              <de.hdodenhof.circleimageview.CircleImageView
+                  android:layout_width="75dp"
+                  android:layout_height="75dp"
+                  android:src="@drawable/head_img"/>
 
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+              <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:layout_gravity="center_vertical"
+                  android:layout_marginLeft="25dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="动态16"
-                        android:textColor="@color/white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:text="积分135"
-                        android:textColor="@color/white" />
-
-                </LinearLayout>
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textSize="18sp"
+                      android:text="Akai1"
+                      android:textColor="@color/white" />
 
 
-            </LinearLayout>
+                  <LinearLayout
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="10dp"
+                      android:orientation="horizontal">
 
-        </LinearLayout>
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="动态16"
+                          android:textColor="@color/white" />
 
-    </RelativeLayout>
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginLeft="30dp"
+                          android:text="积分135"
+                          android:textColor="@color/white" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="40dp"/>
+                  </LinearLayout>
 
-</RelativeLayout>
+
+              </LinearLayout>
+
+          </LinearLayout>
+
+      </RelativeLayout>
+
+      <com.google.android.material.floatingactionbutton.FloatingActionButton
+          android:layout_width="75dp"
+          android:layout_height="75dp"
+          android:layout_alignParentRight="true"
+          android:layout_alignParentBottom="true"
+          android:layout_margin="40dp"/>
+
+  </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

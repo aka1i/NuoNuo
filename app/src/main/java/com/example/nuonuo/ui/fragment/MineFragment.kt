@@ -11,11 +11,15 @@ import android.view.ViewGroup
 import com.example.mykotlin.base.Preference
 
 import com.example.nuonuo.R
+import com.example.nuonuo.marco.Constant
+import com.example.nuonuo.ui.activity.CarOwnerActivity
 import com.example.nuonuo.ui.activity.FirstActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 
 class MineFragment : Fragment(), View.OnClickListener {
+
+    private val name: String by Preference(Constant.USER_NAME_KEY,"")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +35,8 @@ class MineFragment : Fragment(), View.OnClickListener {
     }
 
     fun init(){
+        userNameText.text = name
+        head_img.setOnClickListener(this)
         mine_out_rl.setOnClickListener(this)
     }
 
@@ -40,6 +46,9 @@ class MineFragment : Fragment(), View.OnClickListener {
                 Preference.clear()
                 startActivity(Intent(activity,FirstActivity::class.java))
                 activity?.finish()
+            }
+            R.id.head_img ->{
+                startActivity(Intent(activity,CarOwnerActivity::class.java))
             }
         }
     }

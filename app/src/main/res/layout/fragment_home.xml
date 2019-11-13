@@ -64,7 +64,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_toLeftOf="@+id/home_right_arrow_img"
                 android:background="@null"
-                android:maxLines="1"/>
+                android:singleLine="true"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
