@@ -1,7 +1,9 @@
 package com.example.nuonuo.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Message
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,13 +45,18 @@ class MessageFragment : Fragment(), MessageView {
     }
 
 
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = fragmentManager?.let { MainActivityPagerAdapter(it) }
+        val adapter = childFragmentManager?.let { MainActivityPagerAdapter(it) }
         adapter?.addFragment(sendFragment)
-        adapter?.addFragment(receiveFragment)
 
+        adapter?.addFragment(receiveFragment)
+        viewPager.isScrollble = false
         viewPager.adapter = adapter
         initTab()
         messagePresenterImpl.getSend()

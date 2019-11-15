@@ -28,19 +28,19 @@ class MessageModelImpl: MessageModel {
     }
 
     override fun getReceive(onMessagePresenterListener: MessagePresenter.OnMessagePresenterListener) {
-        with(MessageItemBean("sy","卧槽我车丢了","2019/11/11","")){
+        with(MessageItemBean("wy","卧槽我车丢了","2019/11/11","")){
             MessageLab.receiveMessage.add(this)
         }
-        with(MessageItemBean("sy","卧槽我车丢了","2019/11/11","")){
+        with(MessageItemBean("wy","卧槽我车丢了","2019/11/11","")){
             MessageLab.receiveMessage.add(this)
         }
-        with(MessageItemBean("sy","卧槽我车丢了","2019/11/11","")){
+        with(MessageItemBean("wy","卧槽我车丢了","2019/11/11","")){
             MessageLab.receiveMessage.add(this)
         }
-        with(MessageItemBean("sy","卧槽我车丢了","2019/11/11","")){
+        with(MessageItemBean("wy","卧槽我车丢了","2019/11/11","")){
             MessageLab.receiveMessage.add(this)
         }
-        with(MessageItemBean("sy","卧槽我车丢了","2019/11/11","")){
+        with(MessageItemBean("wy","卧槽我车丢了","2019/11/11","")){
             MessageLab.receiveMessage.add(this)
         }
         onMessagePresenterListener.getReceiveSuccess()

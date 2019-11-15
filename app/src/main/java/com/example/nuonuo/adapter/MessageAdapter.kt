@@ -4,11 +4,16 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.nuonuo.R
 import com.example.nuonuo.bean.MessageItemBean
+import jp.wasabeef.glide.transformations.BlurTransformation
+import kotlinx.android.synthetic.main.activity_car_owner.*
 
 
 class MessageAdapter(var beans: List<MessageItemBean>,var context: Context): RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
@@ -34,7 +39,9 @@ class MessageAdapter(var beans: List<MessageItemBean>,var context: Context): Rec
         holder.nameText.text =  bean.name
         holder.contentText.text = bean.content
         holder.timeText.text = bean.time
-        holder.headImg.background = context.getDrawable(R.drawable.head_img)
+        Glide.with(context)
+            .load(R.drawable.test_bg)
+            .into(holder.headImg)
     }
 
     override fun getItemCount(): Int {

@@ -2,11 +2,13 @@ package com.example.nuonuo.ui.fragment
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MessageAdapter
@@ -18,7 +20,9 @@ import kotlinx.android.synthetic.main.fragment_message_list.*
  */
 class MessageListFragment(private val type: Int) : Fragment() {
 
-    private lateinit var messageAdapter: MessageAdapter
+    private var myView: View? = null
+
+    private  var messageAdapter: MessageAdapter? = null
 
     companion object{
         const val TYPE_SEND = 0
@@ -30,17 +34,16 @@ class MessageListFragment(private val type: Int) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_message_list, container, false)
+        myView = inflater.inflate(R.layout.fragment_message_list, container, false)
+        init()
+        return myView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        init()
-    }
 
     fun init(){
         activity?.apply {
-            message_rv.layoutManager = LinearLayoutManager(this)
+            val recyclerView = myView?.findViewById<RecyclerView>(R.id.message_rv)
+            recyclerView?.layoutManager = LinearLayoutManager(this)
             when(type){
                 TYPE_SEND -> {
                     messageAdapter = MessageAdapter(MessageLab.sendMessages,this)
@@ -49,13 +52,13 @@ class MessageListFragment(private val type: Int) : Fragment() {
                     messageAdapter = MessageAdapter(MessageLab.receiveMessage,this)
                 }
             }
+            recyclerView?.adapter = messageAdapter
         }
-        message_rv.adapter = messageAdapter
-
     }
 
 
     fun refresh(){
-        messageAdapter.notifyDataSetChanged()
+        if (isVisible)
+        messageAdapter?.notifyDataSetChanged()
     }
 }
