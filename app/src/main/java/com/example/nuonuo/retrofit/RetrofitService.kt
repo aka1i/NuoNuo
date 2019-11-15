@@ -25,9 +25,15 @@ interface RetrofitService {
         @Body requestBody: RequestBody
     ): Deferred<LoginResponse>
 
-    @GET("mail/sendResetEmail/{email}")
-    fun getForgotPasswordCode(@Path("email") email:String): Deferred<LoginResponse>
+    @GET
+    fun getForgotPasswordCode(@Url url:String): Deferred<LoginResponse>
 
+    /**
+     * 忘记密码
+     */
     @POST("users/resetPassword")
-    fun getForgotPasswordCode(@Body requestBody: RequestBody): Deferred<LoginResponse>
+    fun forgotPassword(
+        @Body requestBody: RequestBody
+    ): Deferred<LoginResponse>
+
 }

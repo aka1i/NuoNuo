@@ -50,13 +50,17 @@ object RetrofitHelper {
                 Log.d(TAG, request.method())
                 try {
                     val sink = Buffer()
-                    request.body()!!.writeTo(sink)
-                    val json = sink.readString(Charset.defaultCharset())
-                    val jsonObject = JSONObject(json)
-                    Log.d(TAG, json)
+                    request.body()?.apply {
+                        writeTo(sink)
+                        val json = sink.readString(Charset.defaultCharset())
+                        val jsonObject = JSONObject(json)
+                        Log.d(TAG, json)
+                    }
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 } catch (e: IOException) {
+                    e.printStackTrace()
+                }catch (e: Exception){
                     e.printStackTrace()
                 }
 

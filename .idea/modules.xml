@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NuoNuo.iml" filepath="$PROJECT_DIR$/NuoNuo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/NuoNuo-app.iml" filepath="$PROJECT_DIR$/app/NuoNuo-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yjn-NuoNuo.iml" filepath="$PROJECT_DIR$/yjn-NuoNuo.iml" />
     </modules>
   </component>
 </project>

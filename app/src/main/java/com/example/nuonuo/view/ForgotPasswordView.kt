@@ -7,9 +7,9 @@ package com.example.nuonuo.view
 interface ForgotPasswordView {
     fun forgotPasswordSuccess()
 
-    fun forgotPasswordFailed()
+    fun forgotPasswordFailed(error: String?)
 
     fun getEmailCodeSuccess()
 
-    fun getEmailCodeFail()
+    fun getEmailCodeFail(error: String?)
 }
