@@ -1,16 +1,13 @@
 package com.example.nuonuo.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import com.example.mykotlin.base.BaseActivity
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MainActivityPagerAdapter
 import com.example.nuonuo.ui.fragment.HomeFragment
 import com.example.nuonuo.ui.fragment.MessageFragment
 import com.example.nuonuo.ui.fragment.MineFragment
-import com.example.nuonuo.ui.fragment.TreandsFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.nuonuo.ui.fragment.TrendsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -24,7 +21,7 @@ class MainActivity : BaseActivity() {
     fun init(){
         val adapter = MainActivityPagerAdapter(supportFragmentManager)
         adapter.addFragment(HomeFragment())
-        adapter.addFragment(TreandsFragment())
+        adapter.addFragment(TrendsFragment())
         adapter.addFragment(MessageFragment())
         adapter.addFragment(MineFragment())
         viewPager.adapter = adapter

@@ -1,25 +1,37 @@
 package com.example.nuonuo.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Message
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 
 
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MainActivityPagerAdapter
+import com.example.nuonuo.presenter.MessagePresenterImpl
+import com.example.nuonuo.view.MessageView
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.fragment_message.viewPager
 import kotlinx.android.synthetic.main.tab_item.view.*
 
-class MessageFragment : Fragment() {
+class MessageFragment : Fragment(), MessageView {
     private val titleText = arrayOf("发送", "收到")
     private val icons =
         intArrayOf(R.drawable.message_receive, R.drawable.message_send)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+    private val messagePresenterImpl: MessagePresenterImpl by lazy {
+        MessagePresenterImpl(this)
+    }
+
+    private val sendFragment: MessageListFragment by lazy {
+        MessageListFragment(MessageListFragment.TYPE_SEND)
+    }
+
+    private val receiveFragment: MessageListFragment by lazy {
+        MessageListFragment(MessageListFragment.TYPE_RECEIVE)
     }
 
     override fun onCreateView(
@@ -35,12 +47,13 @@ class MessageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = fragmentManager?.let { MainActivityPagerAdapter(it) }
-        adapter?.addFragment(HomeFragment())
-        adapter?.addFragment(TreandsFragment())
+        adapter?.addFragment(sendFragment)
+        adapter?.addFragment(receiveFragment)
 
         viewPager.adapter = adapter
-
         initTab()
+        messagePresenterImpl.getSend()
+        messagePresenterImpl.getRecive()
     }
 
     private fun initTab() {
@@ -54,4 +67,21 @@ class MessageFragment : Fragment() {
         }
     }
 
+    override fun getSendFailed(errorMessage: String?) {
+        Toast.makeText(activity,errorMessage, Toast.LENGTH_SHORT).show()
+
+    }
+
+    override fun getSentSuccess() {
+        sendFragment.refresh()
+    }
+
+    override fun getReceiveFailed(errorMessage: String?) {
+        Toast.makeText(activity,errorMessage, Toast.LENGTH_SHORT).show()
+
+    }
+
+    override fun getReceiveSuccess() {
+        receiveFragment.refresh()
+    }
 }

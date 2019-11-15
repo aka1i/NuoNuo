@@ -31,7 +31,7 @@ interface RetrofitService {
     /**
      * 忘记密码
      */
-    @POST("users/resetPassword")
+    @POST("users/password/reset")
     fun forgotPassword(
         @Body requestBody: RequestBody
     ): Deferred<LoginResponse>
