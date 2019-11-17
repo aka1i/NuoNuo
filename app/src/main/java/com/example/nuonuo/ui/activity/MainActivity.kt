@@ -26,6 +26,7 @@ class MainActivity : BaseActivity() {
         adapter.addFragment(MineFragment())
         viewPager.adapter = adapter
         viewPager.isScrollble = false
+        viewPager.offscreenPageLimit = 4
         bottom_navigation.setOnNavigationItemSelectedListener{ menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_home ->{
