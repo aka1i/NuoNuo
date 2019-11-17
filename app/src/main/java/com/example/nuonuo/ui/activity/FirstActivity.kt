@@ -24,7 +24,10 @@ class FirstActivity : BaseActivity(), View.OnClickListener{
                 setContentView(R.layout.activity_first)
                 init()
             }
-            else -> startActivity(Intent(this,MainActivity::class.java))
+            else ->{
+                startActivity(Intent(this,MainActivity::class.java))
+                finish()
+            }
         }
     }
 
