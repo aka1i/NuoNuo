@@ -32,6 +32,6 @@ class HomeFragment : Fragment() {
     }
 
     fun init(){
-        Log.d("1111111","111111111111111")
+
     }
 }
