@@ -8,4 +8,6 @@ interface TrendView {
 
     fun refresh()
 
+    fun stopRefresh()
+
 }

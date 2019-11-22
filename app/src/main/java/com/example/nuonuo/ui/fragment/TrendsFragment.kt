@@ -2,31 +2,40 @@ package com.example.nuonuo.ui.fragment
 
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.mykotlin.base.Preference
 
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.TrendAdapter
 import com.example.nuonuo.bean.TrendLab
-import com.example.nuonuo.presenter.MessagePresenterImpl
+import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.TrendPresenterImpl
-import com.example.nuonuo.view.MessageView
 import com.example.nuonuo.view.TrendView
+import kotlinx.android.synthetic.main.fragment_treands.*
+import org.w3c.dom.Text
 
 /**
  * A simple [Fragment] subclass.
  */
 class TrendsFragment : Fragment(), TrendView{
 
-    lateinit var myView: View
+    private val name: String by Preference(Constant.USER_NAME_KEY,"")
 
-    lateinit var trendList: RecyclerView
+    private lateinit var myView: View
+
+    private lateinit var trendList: RecyclerView
+
+    private lateinit var refreshLayout: SwipeRefreshLayout
+
+    private lateinit var nameText: TextView
 
     private var trendAdapter: TrendAdapter? = null
 
@@ -48,24 +57,37 @@ class TrendsFragment : Fragment(), TrendView{
     fun init(){
         activity?.apply {
             trendList = myView.findViewById(R.id.trend_list)
+            refreshLayout = myView.findViewById(R.id.swipeRefreshLayout)
             trendList.layoutManager = LinearLayoutManager(activity)
+            nameText = myView.findViewById(R.id.name_text)
+            nameText.text = name
             trendAdapter = TrendAdapter(TrendLab.datas,this)
             trendList.adapter = trendAdapter
             trendPresenterImpl.getTrendListData()
+            refreshLayout.setOnRefreshListener {
+                trendPresenterImpl.getTrendListData()
+            }
         }
 
 
     }
 
     override fun getDataFailed(errorMessage: String?) {
+        stopRefresh()
         Toast.makeText(activity,errorMessage,Toast.LENGTH_SHORT).show()
     }
 
     override fun getSuccess() {
+        stopRefresh()
         refresh()
     }
 
     override fun refresh() {
         trendAdapter?.notifyDataSetChanged()
+    }
+
+    override fun stopRefresh() {
+        if(refreshLayout.isRefreshing)
+            refreshLayout.isRefreshing = false
     }
 }

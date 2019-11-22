@@ -45,16 +45,21 @@ class MessageFragment : Fragment(), MessageView {
     }
 
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        swipeRefreshLayout.setOnRefreshListener {
+            when(viewPager.currentItem){
+                0 -> {
+                    messagePresenterImpl.getSend()
+                }
+                1 ->{
+                    messagePresenterImpl.getRecive()
+                }
+            }
+        }
         val adapter = childFragmentManager?.let { MainActivityPagerAdapter(it) }
         adapter?.addFragment(sendFragment)
-
         adapter?.addFragment(receiveFragment)
         viewPager.isScrollble = false
         viewPager.adapter = adapter
@@ -75,20 +80,29 @@ class MessageFragment : Fragment(), MessageView {
     }
 
     override fun getSendFailed(errorMessage: String?) {
+        stopRefresh()
         Toast.makeText(activity,errorMessage, Toast.LENGTH_SHORT).show()
 
     }
 
     override fun getSentSuccess() {
+        stopRefresh()
         sendFragment.refresh()
     }
 
     override fun getReceiveFailed(errorMessage: String?) {
+        stopRefresh()
         Toast.makeText(activity,errorMessage, Toast.LENGTH_SHORT).show()
 
     }
 
     override fun getReceiveSuccess() {
+        stopRefresh()
         receiveFragment.refresh()
+    }
+
+    override fun stopRefresh() {
+        if (swipeRefreshLayout.isRefreshing)
+            swipeRefreshLayout.isRefreshing = false
     }
 }

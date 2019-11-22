@@ -8,4 +8,6 @@ interface MessageView {
     fun getReceiveFailed(errorMessage: String?)
 
     fun  getReceiveSuccess()
+
+    fun stopRefresh()
 }

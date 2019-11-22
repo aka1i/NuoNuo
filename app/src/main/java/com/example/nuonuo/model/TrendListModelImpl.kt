@@ -8,7 +8,7 @@ class TrendListModelImpl: TrendListModel {
     override fun getTrendList(trendListDataListener: TrendPresenter.OnGetTrendListDataListener) {
 
 //        data class TrendBean (
-//            var name:String?,
+//            var sendName:String?,
 //            var time:String?,
 //            var headImgUrl: String?,
 //            var content: String?,
