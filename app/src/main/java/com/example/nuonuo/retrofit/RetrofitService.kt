@@ -11,7 +11,7 @@ interface RetrofitService {
     /**
      * 注册
      */
-    @POST("users/register")
+    @POST("nuoUsers/register")
     fun register(
         @Body requestBody: RequestBody
     ): Deferred<RegisterResponse>
@@ -20,7 +20,7 @@ interface RetrofitService {
     /**
      * 登入
      */
-    @POST("users/login")
+    @POST("nuoUsers/login")
     fun login(
         @Body requestBody: RequestBody
     ): Deferred<LoginResponse>
@@ -31,7 +31,7 @@ interface RetrofitService {
     /**
      * 忘记密码
      */
-    @POST("users/password/reset")
+    @POST("nuoUsers/password/reset")
     fun forgotPassword(
         @Body requestBody: RequestBody
     ): Deferred<LoginResponse>

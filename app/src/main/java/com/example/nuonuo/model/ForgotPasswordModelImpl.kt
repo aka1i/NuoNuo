@@ -20,7 +20,7 @@ class ForgotPasswordModelImpl(private val onForgotPasswordListener: ForgotPasswo
         GlobalScope.launch(Dispatchers.Main) {
             try {
 
-                codeResponseAsyn = RetrofitHelper.retrofitService.getForgotPasswordCode("http://47.101.140.66:90/mail/sendResetEmail/" + email)
+                codeResponseAsyn = RetrofitHelper.retrofitService.getForgotPasswordCode("http://xyt.fzu.edu.cn:54321/mail/sendResetEmail/" + email)
                 val result = codeResponseAsyn?.await()
                 if (result == null){
                     onForgotPasswordListener.getEmailFailed(Constant.RESULT_NULL)

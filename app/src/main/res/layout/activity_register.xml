@@ -153,7 +153,7 @@
                android:layout_marginTop="5dp"
                android:layout_marginBottom="5dp"
                android:layout_alignParentRight="true"
-               android:src="@drawable/login_user_icon"
+               android:src="@drawable/login_lock_icon"
                android:layout_centerVertical="true" />
        </RelativeLayout>
 
@@ -195,7 +195,7 @@
                android:layout_marginTop="5dp"
                android:layout_marginBottom="5dp"
                android:layout_alignParentRight="true"
-               android:src="@drawable/login_user_icon"
+               android:src="@drawable/register_mail_icon"
                android:layout_centerVertical="true" />
        </RelativeLayout>
 
