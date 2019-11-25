@@ -22,7 +22,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.ForgotPasswordActivity"></activity>
+        <activity android:name=".ui.activity.SelectOwnerActivity"></activity>
+        <activity android:name=".ui.activity.GetCarCodeActivity" />
+        <activity android:name=".ui.activity.ForgotPasswordActivity" />
         <activity android:name=".ui.activity.CarOwnerActivity" />
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
@@ -36,6 +38,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.MainActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

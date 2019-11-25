@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.GetCarCodeActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/car_photo_top_rl"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+
+        <ImageView
+            android:id="@+id/car_photo_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/car_photo_back"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple"
+            android:text="重拍"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/photoImg"
+        android:layout_width="240dp"
+        android:layout_height="320dp"
+        android:layout_below="@+id/car_photo_top_rl"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/car_code_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/photoImg"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="11111"/>
+
+    <ImageView
+        android:layout_below="@id/photoImg"
+        android:id="@+id/applyButton"
+        android:layout_marginTop="80dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/car_photo_tick"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>
