@@ -7,6 +7,7 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
+import com.example.mykotlin.base.BaseActivity
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.EasyImgAdapter
 import com.leochuan.CenterSnapHelper
@@ -14,7 +15,7 @@ import com.leochuan.ScaleLayoutManager
 import com.leochuan.ViewPagerLayoutManager
 import kotlinx.android.synthetic.main.activity_select_owner.*
 
-class SelectOwnerActivity : AppCompatActivity(), View.OnClickListener {
+class SelectOwnerActivity : BaseActivity(), View.OnClickListener {
     private val imgUrls = mutableListOf<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
