@@ -1,39 +1,41 @@
 package com.example.nuonuo.model
 
-import com.example.nuonuo.bean.TrendBean
 import com.example.nuonuo.bean.TrendLab
+import com.example.nuonuo.bean.TrendListResponse
+import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.TrendPresenter
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class TrendListModelImpl: TrendListModel {
+    private  var trendListResponseAsyn: Deferred<TrendListResponse>? = null
     override fun getTrendList(trendListDataListener: TrendPresenter.OnGetTrendListDataListener) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                trendListResponseAsyn = RetrofitHelper.retrofitService.getTrendList()
+                val result = trendListResponseAsyn?.await()
+                if (result == null){
+                    trendListDataListener.getTrendListDataFailed(Constant.RESULT_NULL)
+                }else{
+                    result.data?.run {
+                        TrendLab.datas = this
+                    }
 
-//        data class TrendBean (
-//            var sendName:String?,
-//            var time:String?,
-//            var headImgUrl: String?,
-//            var content: String?,
-//            var contentNum: Int?,
-//            var shareNum: Int?,
-//            var thumbNum: Int?,
-//            var isThumbed: Boolean?,
-//            var imgsUrl: List<String>?,
-//            var leaves: List<leave>?
-//        ){
-//            data class leave(var leaveName: String?,var leaveContent: String?)
-//        }
-        var list = ArrayList<String>()
-        list.add("")
-        list.add("")
-        var list2 = ArrayList<TrendBean.leave>()
-        list2.add(TrendBean.leave("sy","LSH 牛逼"))
-        list2.add(TrendBean.leave("wy","LSH 牛逼！！"))
+                    trendListDataListener.getTrendListDataSuccess()
+                }
 
-        with(TrendBean("Aka1i","五分钟前","","卧槽我车丢了",10,111,12,true,list,list2 )){
-            TrendLab.datas.add(this)
+
+            }catch (e: Exception){
+                e.printStackTrace()
+                if(e is HttpException){
+                    trendListDataListener.getTrendListDataFailed(e.response().errorBody()?.string())
+                }else{
+                    trendListDataListener.getTrendListDataFailed(e.message)
+                }
+            }
         }
-        with(TrendBean("Aka1i","五分钟前","","卧槽我车丢了",10,111,12,true,list,list2 )){
-            TrendLab.datas.add(this)
-        }
-        trendListDataListener.getTrendListDataSuccess()
     }
 }

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.Image
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -45,8 +46,8 @@ class HomeFragment : Fragment(), View.OnClickListener{
         const val CROP_REQUEST_CODE = 3
     }
 
-    lateinit var cameraUri: Uri
-    lateinit var cropUri: Uri
+    private lateinit var cameraUri: Uri
+    private lateinit var cropUri: Uri
     private var pop: PopupWindow? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -112,7 +113,7 @@ class HomeFragment : Fragment(), View.OnClickListener{
                                 2
                             )
                         } else
-                            getPhotoByCamera()
+                            cameraUri = ImageUtil.getPhotoByCamera(this@HomeFragment)!!
                     R.id.tv_cancel -> {
                     }
                 }//取消
@@ -146,31 +147,7 @@ class HomeFragment : Fragment(), View.OnClickListener{
 
 
 
-    private fun getPhotoByCamera() {
-        activity?.run {
-            val outputImage = File(externalCacheDir, "output.jpg")
-            try {
-                if (outputImage.exists())
-                    outputImage.delete()
-                outputImage.createNewFile()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
 
-            val intent = Intent("android.media.action.IMAGE_CAPTURE")
-            if (Build.VERSION.SDK_INT >= 24) {
-                intent.flags = Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-                cameraUri = FileProvider.getUriForFile(
-                    this,
-                    "com.example.nuonuo.provider", outputImage
-                )
-            } else {
-                cameraUri = Uri.fromFile(outputImage)
-            }
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri)
-            startActivityForResult(intent, TAKE_PHOTO)
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         activity?.run {
@@ -235,7 +212,7 @@ class HomeFragment : Fragment(), View.OnClickListener{
                 Toast.makeText(activity, "您已拒绝读取SD卡权限，请前往设置授权该应用", Toast.LENGTH_SHORT).show()
             }
             2 -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getPhotoByCamera()
+                cameraUri = ImageUtil.getPhotoByCamera(this)!!
             } else {
                 Toast.makeText(activity, "您已拒绝读拍照，请前往设置授权该应用", Toast.LENGTH_SHORT).show()
             }

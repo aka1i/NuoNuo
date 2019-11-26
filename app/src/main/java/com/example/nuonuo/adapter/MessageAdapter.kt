@@ -9,10 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.nuonuo.R
-import com.example.nuonuo.bean.MessageItemBean
+import com.example.nuonuo.bean.MessageListResponse
 
 
-class MessageAdapter(var beans: List<MessageItemBean>,var context: Context): RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
+class MessageAdapter(var beans: List<MessageListResponse.MessageItemBean>, var context: Context): RecyclerView.Adapter<MessageAdapter.ViewHolder>(){
 
 
 
@@ -30,11 +30,12 @@ class MessageAdapter(var beans: List<MessageItemBean>,var context: Context): Rec
         }
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bean = beans[position]
         holder.nameText.text =  bean.sendName
         holder.contentText.text = bean.content
-        holder.timeText.text = bean.time
+        holder.timeText.text = bean.stateTime
         Glide.with(context)
             .load(R.drawable.test_bg)
             .into(holder.headImg)
@@ -49,7 +50,6 @@ class MessageAdapter(var beans: List<MessageItemBean>,var context: Context): Rec
             .inflate(R.layout.item_message, parent, false)
         return ViewHolder(view)
     }
-
 
 
 

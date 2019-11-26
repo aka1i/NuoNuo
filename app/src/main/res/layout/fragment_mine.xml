@@ -132,8 +132,10 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/modify_info_rl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/click_relativelayout"
                     android:padding="10dp">
 
                     <TextView
@@ -145,12 +147,12 @@
                         android:textSize="16sp"
                         android:drawablePadding="10dp"/>
 
-                    <!--                <ImageView-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:layout_centerVertical="true"-->
-                    <!--                    android:layout_alignParentRight="true"-->
-                    <!--                    android:src="@drawable/mine_"/>-->
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_navigate_next_grey_500_24dp"/>
 
                 </RelativeLayout>
 
@@ -172,12 +174,13 @@
                         android:drawableLeft="@drawable/mine_question_icon"
                         android:drawablePadding="10dp"/>
 
-                    <!--                <ImageView-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:layout_centerVertical="true"-->
-                    <!--                    android:layout_alignParentRight="true"-->
-                    <!--                    android:src="@drawable/mine_"/>-->
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_navigate_next_grey_500_24dp"/>
 
                 </RelativeLayout>
 
@@ -199,12 +202,13 @@
                         android:drawableLeft="@drawable/mine_update_icon"
                         android:drawablePadding="10dp"/>
 
-                    <!--                <ImageView-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:layout_centerVertical="true"-->
-                    <!--                    android:layout_alignParentRight="true"-->
-                    <!--                    android:src="@drawable/mine_"/>-->
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_navigate_next_grey_500_24dp"/>
 
                 </RelativeLayout>
 
@@ -226,12 +230,13 @@
                         android:drawableLeft="@drawable/mine_setting_icon"
                         android:drawablePadding="10dp"/>
 
-                    <!--                <ImageView-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:layout_centerVertical="true"-->
-                    <!--                    android:layout_alignParentRight="true"-->
-                    <!--                    android:src="@drawable/mine_"/>-->
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_navigate_next_grey_500_24dp"/>
 
                 </RelativeLayout>
 
@@ -254,12 +259,13 @@
                         android:drawableLeft="@drawable/mine_about_icon"
                         android:drawablePadding="10dp"/>
 
-                    <!--                <ImageView-->
-                    <!--                    android:layout_width="wrap_content"-->
-                    <!--                    android:layout_height="wrap_content"-->
-                    <!--                    android:layout_centerVertical="true"-->
-                    <!--                    android:layout_alignParentRight="true"-->
-                    <!--                    android:src="@drawable/mine_"/>-->
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_navigate_next_grey_500_24dp"/>
 
                 </RelativeLayout>
 

@@ -6,11 +6,15 @@ import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import com.example.nuonuo.ui.fragment.HomeFragment
 import com.example.nuonuo.ui.fragment.HomeFragment.Companion.CROP_REQUEST_CODE
+import java.io.File
+import java.io.IOException
 
 /**
 @author yjn
@@ -18,6 +22,65 @@ import com.example.nuonuo.ui.fragment.HomeFragment.Companion.CROP_REQUEST_CODE
  */
 class ImageUtil {
     companion object{
+
+
+        fun getPhotoByCamera(activity: Activity):Uri {
+            var cameraUri: Uri
+            activity.run {
+                val outputImage = File(externalCacheDir, "output.jpg")
+                try {
+                    if (outputImage.exists())
+                        outputImage.delete()
+                    outputImage.createNewFile()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+
+                val intent = Intent("android.media.action.IMAGE_CAPTURE")
+                if (Build.VERSION.SDK_INT >= 24) {
+                    intent.flags = Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    cameraUri = FileProvider.getUriForFile(
+                        this,
+                        "com.example.nuonuo.provider", outputImage
+                    )
+                } else {
+                    cameraUri = Uri.fromFile(outputImage)
+                }
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri)
+                startActivityForResult(intent, HomeFragment.TAKE_PHOTO)
+            }
+            return cameraUri
+        }
+
+        fun getPhotoByCamera(fragment: Fragment):Uri? {
+            var cameraUri: Uri? = null
+            fragment.activity?.run {
+                val outputImage = File(externalCacheDir, "output.jpg")
+                try {
+                    if (outputImage.exists())
+                        outputImage.delete()
+                    outputImage.createNewFile()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+
+                val intent = Intent("android.media.action.IMAGE_CAPTURE")
+                if (Build.VERSION.SDK_INT >= 24) {
+                    intent.flags = Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    cameraUri = FileProvider.getUriForFile(
+                        this,
+                        "com.example.nuonuo.provider", outputImage
+                    )
+                } else {
+                    cameraUri = Uri.fromFile(outputImage)
+                }
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri)
+                startActivityForResult(intent, HomeFragment.TAKE_PHOTO)
+            }
+            return cameraUri
+        }
+
+
 
         fun openAlbum(fragment: Fragment) {
             val intent = Intent("android.intent.action.GET_CONTENT")
@@ -132,7 +195,7 @@ class ImageUtil {
             return cropUri
         }
 
-        private fun cropPhotoForRectangle(context: Activity, uri: Uri,width: Int,height: Int): Uri{
+        fun cropPhotoForRectangle(context: Activity, uri: Uri,width: Int,height: Int): Uri{
             val intent = Intent("com.android.camera.action.CROP")
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION)

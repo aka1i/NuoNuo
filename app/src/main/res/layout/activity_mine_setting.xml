@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/setting_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/purple">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="个人信息修改"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/modifyinfo_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="right"
+                android:gravity="center_vertical"
+                android:text="保存"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/setting_headimg_r1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/white">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp"
+                        android:text="头像"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/mine_setting_head"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="11dp"
+                        android:layout_marginRight="11dp"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/head_img" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1dp"
+                    android:background="@drawable/edit_border_line_1"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/setting_name_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:text="昵称"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/setting_name_tv1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/setting_name_tv"
+                        android:layout_toRightOf="@id/setting_name_tv"
+                        android:gravity="end"
+                        android:padding="8dp"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:background="@drawable/edit_border_line_1"
+                        android:textColor="@color/grey_2"
+
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/click_relativelayout"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/setting_sex_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:text="性别"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/setting_sex_tv1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/setting_sex_tv"
+                        android:layout_toRightOf="@id/setting_sex_tv"
+                        android:gravity="right"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_border_line_1"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+                    <TextView
+                        android:id="@+id/setting_phonenumber_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:text="手机"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/setting_phonenumber_tv1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/setting_phonenumber_tv"
+                        android:layout_toRightOf="@id/setting_phonenumber_tv"
+                        android:background="@null"
+                        android:gravity="right"
+                        android:maxLength="11"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_border_line_1">
+
+                    <TextView
+                        android:id="@+id/setting_qqnumber_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:text="QQ "
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/setting_qqnumber_tv1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/setting_qqnumber_tv"
+                        android:layout_toRightOf="@id/setting_qqnumber_tv"
+                        android:gravity="right"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:background="@null"
+                        android:maxLength="11"
+                        android:maxLines="1"
+                        android:hint="请填入QQ号"/>
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edit_border_line_1">
+
+                    <TextView
+                        android:id="@+id/setting_wechatnumber_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:text="微信"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/setting_wechatnumber_tv1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_toEndOf="@id/setting_wechatnumber_tv"
+                        android:layout_toRightOf="@id/setting_wechatnumber_tv"
+                        android:gravity="right"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:background="@null"
+                        android:maxLength="20"
+                        android:digits="-_0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        android:hint="请填入微信号"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+
+</RelativeLayout>

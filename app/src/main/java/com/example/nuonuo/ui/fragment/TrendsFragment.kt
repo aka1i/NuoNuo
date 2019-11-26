@@ -83,6 +83,7 @@ class TrendsFragment : Fragment(), TrendView{
     }
 
     override fun refresh() {
+        trendAdapter?.beans = TrendLab.datas
         trendAdapter?.notifyDataSetChanged()
     }
 

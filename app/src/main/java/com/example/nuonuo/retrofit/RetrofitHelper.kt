@@ -37,36 +37,36 @@ object RetrofitHelper {
             connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
             // get response cookie
-            addInterceptor {
-                val request = it
-                    .request()
-                    .newBuilder()
-                    .addHeader("Content-Type", "application/json")
-                    .addHeader("Accept"," application/json")
-                    .build()
-                val response = it.proceed(request)
-                Log.d(TAG, request.url().host())
-                Log.d(TAG, request.url().encodedPath())
-                Log.d(TAG, request.method())
-                try {
-                    val sink = Buffer()
-                    request.body()?.apply {
-                        writeTo(sink)
-                        val json = sink.readString(Charset.defaultCharset())
-                        val jsonObject = JSONObject(json)
-                        Log.d(TAG, json)
-                    }
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }catch (e: Exception){
-                    e.printStackTrace()
-                }
-
-
-                response
-            }
+//            addInterceptor {
+//                val request = it
+//                    .request()
+//                    .newBuilder()
+//                    .addHeader("Content-Type", "application/json")
+//                    .addHeader("Accept"," application/json")
+//                    .build()
+//                val response = it.proceed(request)
+//                Log.d(TAG, request.url().host())
+//                Log.d(TAG, request.url().encodedPath())
+//                Log.d(TAG, request.method())
+//                try {
+//                    val sink = Buffer()
+//                    request.body()?.apply {
+//                        writeTo(sink)
+//                        val json = sink.readString(Charset.defaultCharset())
+//                        val jsonObject = JSONObject(json)
+//                        Log.d(TAG, json)
+//                    }
+//                } catch (e: JSONException) {
+//                    e.printStackTrace()
+//                } catch (e: IOException) {
+//                    e.printStackTrace()
+//                }catch (e: Exception){
+//                    e.printStackTrace()
+//                }
+//
+//
+//                response
+//            }
         }
 
         return RetrofitBuild(

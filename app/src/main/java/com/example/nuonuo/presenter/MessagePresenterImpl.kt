@@ -7,8 +7,8 @@ class MessagePresenterImpl(private val messageView: MessageView): MessagePresent
 
     private val messageModelImpl: MessageModelImpl = MessageModelImpl()
 
-    override fun getSend() {
-        messageModelImpl.getSend(this)
+    override fun getSend(accessToken:String,uid: Int) {
+        messageModelImpl.getSend(this,accessToken,uid)
     }
 
     override fun getSendFailed(errorMessage: String?) {
@@ -19,8 +19,8 @@ class MessagePresenterImpl(private val messageView: MessageView): MessagePresent
         messageView.getSentSuccess()
     }
 
-    override fun getRecive() {
-        messageModelImpl.getReceive(this)
+    override fun getRecive(accessToken:String,uid: Int) {
+        messageModelImpl.getReceive(this,accessToken,uid)
     }
 
     override fun getReceiveFailed(errorMessage: String?) {

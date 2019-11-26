@@ -14,6 +14,7 @@ import com.example.nuonuo.R
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.ui.activity.CarOwnerActivity
 import com.example.nuonuo.ui.activity.FirstActivity
+import com.example.nuonuo.ui.activity.SettingActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 
@@ -38,6 +39,7 @@ class MineFragment : Fragment(), View.OnClickListener {
         userNameText.text = name
         head_img.setOnClickListener(this)
         mine_out_rl.setOnClickListener(this)
+        modify_info_rl.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -49,6 +51,9 @@ class MineFragment : Fragment(), View.OnClickListener {
             }
             R.id.head_img ->{
                 startActivity(Intent(activity,CarOwnerActivity::class.java))
+            }
+            R.id.modify_info_rl -> {
+                startActivity(Intent(activity,SettingActivity::class.java))
             }
         }
     }

@@ -11,10 +11,6 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.nuonuo.R
-import com.example.nuonuo.bean.MessageItemBean
-import jp.wasabeef.glide.transformations.BlurTransformation
-import kotlinx.android.synthetic.main.activity_car_owner.*
-
 
 class ImgsAdapter(var beans: List<String>, var context: Context): RecyclerView.Adapter<ImgsAdapter.ViewHolder>() {
 

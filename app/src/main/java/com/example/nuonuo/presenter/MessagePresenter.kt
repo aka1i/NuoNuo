@@ -4,13 +4,13 @@ import com.example.nuonuo.view.MessageView
 
 interface MessagePresenter {
     interface OnMessagePresenterListener{
-        fun getSend()
+        fun getSend(accessToken:String,uid: Int)
 
         fun getSendFailed(errorMessage: String?)
 
         fun getSentSuccess()
 
-        fun getRecive()
+        fun getRecive(accessToken:String,uid: Int)
 
         fun getReceiveFailed(errorMessage: String?)
 

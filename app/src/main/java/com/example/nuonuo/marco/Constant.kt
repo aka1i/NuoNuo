@@ -1,7 +1,7 @@
 package com.example.nuonuo.marco
 
 object Constant {
-    const val REQUEST_BASE_URL = "http://xyt.fzu.edu.cn:54321/v1/"
+    const val REQUEST_BASE_URL = "http://xyt.fzu.edu.cn:54321/"
     const val SHARED_NAME = "user_info"
     const val RESULT_NULL = "result null!"
     const val LOGIN_KEY = "login"

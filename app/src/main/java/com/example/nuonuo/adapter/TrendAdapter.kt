@@ -11,10 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.nuonuo.R
-import com.example.nuonuo.bean.TrendBean
+import com.example.nuonuo.bean.TrendListResponse
 
 
-class TrendAdapter(var beans: List<TrendBean>, var context: Context): RecyclerView.Adapter<TrendAdapter.ViewHolder>() {
+class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context): RecyclerView.Adapter<TrendAdapter.ViewHolder>() {
 
 
 
@@ -48,21 +48,21 @@ class TrendAdapter(var beans: List<TrendBean>, var context: Context): RecyclerVi
         val bean = beans[position]
         holder.nameText.text =  bean.name
         holder.contentText.text = bean.content
-        holder.timeText.text = bean.time
+        holder.timeText.text = bean.stateTime
         Glide.with(context)
             .load(R.drawable.test_bg)
             .into(holder.headImg)
-        holder.thumbNum.text = bean.thumbNum.toString()
-        holder.shareNum.text = bean.shareNum.toString()
-        holder.commentNum.text = bean.contentNum.toString()
+        holder.thumbNum.text = bean.id.toString()
+        holder.shareNum.text = bean.id.toString()
+        holder.commentNum.text = bean.id.toString()
 
-        bean.imgsUrl?.apply {
-            holder.imgsRL.adapter = ImgsAdapter(this,context)
-
-        }
-        bean.leaves?.apply {
-            holder.leaveRL.adapter = LeaveAdapter(this,context)
-        }
+//        bean.otherPicIds?.apply {
+//            holder.imgsRL.adapter = ImgsAdapter(this,context)
+//
+//        }
+//        bean.leaves?.apply {
+//            holder.leaveRL.adapter = LeaveAdapter(this,context)
+//        }
     }
 
     override fun getItemCount(): Int {

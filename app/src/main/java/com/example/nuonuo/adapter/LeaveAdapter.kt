@@ -7,10 +7,10 @@ import android.content.Context
 import android.view.View
 import android.widget.TextView
 import com.example.nuonuo.R
-import com.example.nuonuo.bean.TrendBean
+import com.example.nuonuo.bean.TrendListResponse
 
 
-class LeaveAdapter(var beans: List<TrendBean.leave>, var context: Context): RecyclerView.Adapter<LeaveAdapter.ViewHolder>() {
+class LeaveAdapter(var beans: List<TrendListResponse.Data.leave>, var context: Context): RecyclerView.Adapter<LeaveAdapter.ViewHolder>() {
 
 
 
@@ -26,8 +26,8 @@ class LeaveAdapter(var beans: List<TrendBean.leave>, var context: Context): Recy
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bean = beans[position]
-        holder.nameText.text =  bean.leaveName + "："
-        holder.contentText.text = bean.leaveContent
+        holder.nameText.text =  bean.name + "："
+        holder.contentText.text = bean.content
     }
 
     override fun getItemCount(): Int {

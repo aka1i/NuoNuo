@@ -9,10 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.mykotlin.base.Preference
 
 
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MainActivityPagerAdapter
+import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.MessagePresenterImpl
 import com.example.nuonuo.view.MessageView
 import kotlinx.android.synthetic.main.fragment_message.*
@@ -20,6 +22,11 @@ import kotlinx.android.synthetic.main.fragment_message.viewPager
 import kotlinx.android.synthetic.main.tab_item.view.*
 
 class MessageFragment : Fragment(), MessageView {
+
+    private var accessToken: String by Preference(Constant.ACCESS_TOKEN_KEY,"")
+
+    private var uid: Int by Preference(Constant.UID_KEY,0)
+
     private val titleText = arrayOf("发送", "收到")
     private val icons =
         intArrayOf(R.drawable.message_receive, R.drawable.message_send)
@@ -51,10 +58,10 @@ class MessageFragment : Fragment(), MessageView {
         swipeRefreshLayout.setOnRefreshListener {
             when(viewPager.currentItem){
                 0 -> {
-                    messagePresenterImpl.getSend()
+                    messagePresenterImpl.getSend(accessToken,uid)
                 }
                 1 ->{
-                    messagePresenterImpl.getRecive()
+                    messagePresenterImpl.getRecive(accessToken,uid)
                 }
             }
         }
@@ -64,8 +71,8 @@ class MessageFragment : Fragment(), MessageView {
         viewPager.isScrollble = false
         viewPager.adapter = adapter
         initTab()
-        messagePresenterImpl.getSend()
-        messagePresenterImpl.getRecive()
+        messagePresenterImpl.getSend(accessToken,uid)
+        messagePresenterImpl.getRecive(accessToken,uid)
     }
 
     private fun initTab() {
