@@ -75,7 +75,7 @@ class ImageUtil {
                     cameraUri = Uri.fromFile(outputImage)
                 }
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri)
-                startActivityForResult(intent, HomeFragment.TAKE_PHOTO)
+                fragment.startActivityForResult(intent, HomeFragment.TAKE_PHOTO)
             }
             return cameraUri
         }

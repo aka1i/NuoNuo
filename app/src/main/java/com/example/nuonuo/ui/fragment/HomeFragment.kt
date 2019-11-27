@@ -153,9 +153,8 @@ class HomeFragment : Fragment(), View.OnClickListener{
         activity?.run {
             when (requestCode) {
                 TAKE_PHOTO -> if (resultCode == RESULT_OK) {
-                    Toast.makeText(this,"拍照成功",Toast.LENGTH_SHORT).show()
                     try {
-                        cropUri = ImageUtil.cropPhotoForRectangle(this@HomeFragment,cameraUri,3,4)
+                        cropUri = ImageUtil.cropPhotoForRectangle(this@HomeFragment,cameraUri,4,3)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -182,17 +181,15 @@ class HomeFragment : Fragment(), View.OnClickListener{
                             } else {
                                 Uri.fromFile(file)
                             }
-                            cropUri = ImageUtil.cropPhotoForRectangle(this@HomeFragment,cropUri,3,4)
+                            cropUri = ImageUtil.cropPhotoForRectangle(this@HomeFragment,cropUri,4,3)
                         }
                     }
                 }
                 CROP_REQUEST_CODE ->{
                     if (resultCode == RESULT_OK) {
-                        Toast.makeText(this,"切图成功",Toast.LENGTH_SHORT).show()
                         val intent = Intent(this,GetCarCodeActivity::class.java)
                         startActivity(intent)
                     }else{
-                        Toast.makeText(this,"切图失败",Toast.LENGTH_SHORT).show()
                     }
                 }
 

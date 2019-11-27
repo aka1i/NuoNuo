@@ -14,4 +14,6 @@ object Constant {
     const val WEIXIN_KYE = "weixin"
     const val HEAD_PIC_ID_KEY = "head_pic_id"
     const val HEAD_PIC_URL_KEY = "head_pic_url"
+    const val BAIDU_API_EXPIRES_IN= "baidu_apiexpires_in"
+    const val BAIDU_API_ACCESS_TOKEN = "baidu_api_access_token"
 }

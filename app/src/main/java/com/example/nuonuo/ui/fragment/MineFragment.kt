@@ -22,6 +22,8 @@ class MineFragment : Fragment(), View.OnClickListener {
 
     private val name: String by Preference(Constant.USER_NAME_KEY,"")
 
+    private var uid: Int by Preference(Constant.UID_KEY,0)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,7 +52,11 @@ class MineFragment : Fragment(), View.OnClickListener {
                 activity?.finish()
             }
             R.id.head_img ->{
-                startActivity(Intent(activity,CarOwnerActivity::class.java))
+                with(Intent(activity,CarOwnerActivity::class.java)){
+                    putExtra("uid",uid)
+                    startActivity(this)
+                }
+
             }
             R.id.modify_info_rl -> {
                 startActivity(Intent(activity,SettingActivity::class.java))

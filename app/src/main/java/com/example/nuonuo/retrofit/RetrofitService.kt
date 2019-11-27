@@ -1,5 +1,6 @@
 import com.example.nuonuo.bean.*
 import kotlinx.coroutines.Deferred
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
 
@@ -50,4 +51,22 @@ interface RetrofitService {
         @Header("Authorization") access_token: String
     ): Deferred<MessageListResponse>
 
+
+    @POST("v1/message/reply/{id}")
+    fun sendMessage(
+        @Body requestBody: RequestBody,
+        @Header("Authorization") access_token: String,
+        @Path("id")id:Int
+    ): Deferred<SendMessageResponse>
+
+    @GET("https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=qK5G2nQ2I1irOTQQO3Xylo5L&client_secret=NN2jPoc2UyZYHCLn9PL5sywtjHf4fY3x&")
+    fun getBaiduToken(): Deferred<BaiduTokenResponse>
+
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    @POST("https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic")
+    fun getORC(
+        @Field("image") image: String,
+        @Query("access_token") access_token: String
+    ): Deferred<BaiduOCRResponse>
 }

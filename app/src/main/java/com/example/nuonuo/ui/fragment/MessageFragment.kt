@@ -1,9 +1,6 @@
 package com.example.nuonuo.ui.fragment
 
-import android.content.Context
 import android.os.Bundle
-import android.os.Message
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +13,12 @@ import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MainActivityPagerAdapter
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.MessagePresenterImpl
-import com.example.nuonuo.view.MessageView
+import com.example.nuonuo.view.MessageListView
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.fragment_message.viewPager
 import kotlinx.android.synthetic.main.tab_item.view.*
 
-class MessageFragment : Fragment(), MessageView {
+class MessageFragment : Fragment(), MessageListView {
 
     private var accessToken: String by Preference(Constant.ACCESS_TOKEN_KEY,"")
 

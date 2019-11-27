@@ -3,18 +3,21 @@ package com.example.nuonuo.model
 import android.util.Log
 import com.example.nuonuo.bean.MessageLab
 import com.example.nuonuo.bean.MessageListResponse
+import com.example.nuonuo.bean.SendMessageResponse
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.MessagePresenter
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import retrofit2.HttpException
 import kotlin.math.log
 
 class MessageModelImpl: MessageModel {
     private  var sendMessageListResponseAsyn: Deferred<MessageListResponse>? = null
     private  var receiveMessageListResponseAsyn: Deferred<MessageListResponse>? = null
+    private var SendMessageResponseAsyn: Deferred<SendMessageResponse>? = null
     override fun getSend(onMessagePresenterListener: MessagePresenter.OnMessagePresenterListener,accessToken:String,uid:Int) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
@@ -71,6 +74,36 @@ class MessageModelImpl: MessageModel {
                     onMessagePresenterListener.getReceiveFailed(e.response().errorBody()?.string())
                 }else{
                     onMessagePresenterListener.getReceiveFailed(e.message)
+                }
+            }
+        }
+    }
+
+    override fun sendMessage(onSendMessageListener: MessagePresenter.OnSendMessageListener,content: String, accessToken: String, uid: Int) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val jsonObject = JSONObject()
+                jsonObject.put("content",content)
+                SendMessageResponseAsyn = RetrofitHelper.retrofitService.sendMessage(
+                    RetrofitHelper.getRequestBodyByJson(jsonObject),
+                    accessToken,
+                    uid)
+                val result = SendMessageResponseAsyn?.await()
+                if (result == null){
+                    onSendMessageListener.senMessageeFailed(Constant.RESULT_NULL)
+                }else
+                {
+
+                    onSendMessageListener.senMessageSuccess()
+                }
+
+
+            }catch (e: Exception){
+                e.printStackTrace()
+                if(e is HttpException){
+                    onSendMessageListener.senMessageeFailed(e.response().errorBody()?.string())
+                }else{
+                    onSendMessageListener.senMessageeFailed(e.message)
                 }
             }
         }

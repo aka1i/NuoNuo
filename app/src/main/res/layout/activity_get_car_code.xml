@@ -41,8 +41,8 @@
         </RelativeLayout>
         <ImageView
             android:id="@+id/photoImg"
-            android:layout_width="240dp"
-            android:layout_height="320dp"
+            android:layout_width="280dp"
+            android:layout_height="210dp"
             android:layout_below="@+id/car_photo_top_rl"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"/>

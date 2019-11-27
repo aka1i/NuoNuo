@@ -1,6 +1,6 @@
 package com.example.nuonuo.view
 
-interface MessageView {
+interface MessageListView {
     fun getSendFailed(errorMessage: String?)
 
     fun getSentSuccess()

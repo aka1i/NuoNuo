@@ -1,11 +1,13 @@
 package com.example.nuonuo.presenter
 
 import com.example.nuonuo.model.MessageModelImpl
-import com.example.nuonuo.view.MessageView
+import com.example.nuonuo.view.MessageListView
 
-class MessagePresenterImpl(private val messageView: MessageView): MessagePresenter.OnMessagePresenterListener {
+class MessagePresenterImpl(private val messageView: MessageListView): MessagePresenter.OnMessagePresenterListener{
 
-    private val messageModelImpl: MessageModelImpl = MessageModelImpl()
+    private val messageModelImpl: MessageModelImpl by lazy {
+        MessageModelImpl()
+    }
 
     override fun getSend(accessToken:String,uid: Int) {
         messageModelImpl.getSend(this,accessToken,uid)
@@ -30,4 +32,5 @@ class MessagePresenterImpl(private val messageView: MessageView): MessagePresent
     override fun getReceiveSuccess() {
         messageView.getReceiveSuccess()
     }
+
 }

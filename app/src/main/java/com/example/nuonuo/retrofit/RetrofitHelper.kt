@@ -1,4 +1,6 @@
 
+import android.net.Uri
+import android.os.Environment
 import com.example.nuonuo.marco.Constant
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
@@ -9,9 +11,12 @@ import java.util.concurrent.TimeUnit
 import okhttp3.MediaType
 import android.util.Log
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.MultipartBody
 import org.json.JSONException
 import okio.Buffer
+import java.io.File
 import java.io.IOException
+import java.net.URI
 import java.nio.charset.Charset
 
 
@@ -82,8 +87,16 @@ object RetrofitHelper {
      */
     private fun <T> getService(url: String, service: Class<T>): T = create(url).create(service)
 
-    public fun getRequestBodyByJson(json:JSONObject): RequestBody{
+    fun getRequestBodyByJson(json:JSONObject): RequestBody{
         return RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json.toString())
+    }
+
+    fun getImageBody(path:String): MultipartBody.Part{
+        var file = File(path)
+        val imageBody = RequestBody.create(MediaType.parse("image/*"),file)
+        val image = MultipartBody.Part.createFormData("image","nuoImage",imageBody)
+        Log.d("imageFilePath",file.path)
+        return image
     }
 
 }

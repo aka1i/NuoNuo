@@ -1,7 +1,5 @@
 package com.example.nuonuo.presenter
 
-import com.example.nuonuo.view.MessageView
-
 interface MessagePresenter {
     interface OnMessagePresenterListener{
         fun getSend(accessToken:String,uid: Int)
@@ -15,5 +13,14 @@ interface MessagePresenter {
         fun getReceiveFailed(errorMessage: String?)
 
         fun  getReceiveSuccess()
+
+    }
+
+    interface OnSendMessageListener{
+        fun senMessage(content:String,accessToken:String,uid: Int)
+
+        fun senMessageeFailed(errorMessage: String?)
+
+        fun  senMessageSuccess()
     }
 }
