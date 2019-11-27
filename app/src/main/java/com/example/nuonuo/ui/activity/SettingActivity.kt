@@ -24,6 +24,9 @@ import com.example.nuonuo.R
 import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.bean.UserInfo
 import com.example.nuonuo.marco.Constant
+import com.example.nuonuo.marco.Constant.CHOOSE_PHOTO
+import com.example.nuonuo.marco.Constant.CROP_REQUEST_CODE
+import com.example.nuonuo.marco.Constant.TAKE_PHOTO
 import com.example.nuonuo.presenter.ModifyPresenterImpl
 import com.example.nuonuo.ui.fragment.HomeFragment
 import com.example.nuonuo.utils.BitmapUtil
@@ -32,6 +35,10 @@ import com.example.nuonuo.utils.ImageUtil
 import com.example.nuonuo.utils.PopUpUtil
 import com.example.nuonuo.view.ModifyView
 import kotlinx.android.synthetic.main.activity_mine_setting.*
+import kotlinx.android.synthetic.main.activity_mine_setting.modifyinfo_btn
+import kotlinx.android.synthetic.main.activity_mine_setting.progressBar
+import kotlinx.android.synthetic.main.activity_mine_setting.setting_title
+import kotlinx.android.synthetic.main.activity_new_trend.*
 import kotlinx.android.synthetic.main.layout_bottom_dialog.view.*
 import java.io.File
 
@@ -73,7 +80,10 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
     }
 
     private fun init(){
-
+        setting_title.setNavigationIcon(R.drawable.ic_navigate_before_white_24dp)
+        setting_title.setNavigationOnClickListener {
+            finish()
+        }
         refreshData()
         setting_sex_tv1.setOnClickListener(this)
         modifyinfo_btn.setOnClickListener(this)
@@ -257,7 +267,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
-            HomeFragment.TAKE_PHOTO -> if (resultCode == Activity.RESULT_OK) {
+            TAKE_PHOTO -> if (resultCode == Activity.RESULT_OK) {
                 Toast.makeText(this,"拍照成功",Toast.LENGTH_SHORT).show()
                 try {
                     cropUri = ImageUtil.cropPhotoForCircle(this,cameraUri)
@@ -265,7 +275,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
                     e.printStackTrace()
                 }
             }
-            HomeFragment.CHOOSE_PHOTO -> {// 图片选择结果回调
+            CHOOSE_PHOTO -> {// 图片选择结果回调
                 if (resultCode == Activity.RESULT_OK) {
                     var path: String? = ""
                     if (data?.data != null) {
@@ -291,7 +301,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
                     }
                 }
             }
-            HomeFragment.CROP_REQUEST_CODE ->{
+            CROP_REQUEST_CODE ->{
                 if (resultCode == Activity.RESULT_OK) {
                     Toast.makeText(this,"切图成功",Toast.LENGTH_SHORT).show()
                     selectHeadImg = BitmapUtil.compressImage(

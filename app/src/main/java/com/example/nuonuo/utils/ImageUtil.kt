@@ -11,8 +11,9 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import com.example.nuonuo.ui.fragment.HomeFragment
-import com.example.nuonuo.ui.fragment.HomeFragment.Companion.CROP_REQUEST_CODE
+import com.example.nuonuo.marco.Constant.CHOOSE_PHOTO
+import com.example.nuonuo.marco.Constant.CROP_REQUEST_CODE
+import com.example.nuonuo.marco.Constant.TAKE_PHOTO
 import java.io.File
 import java.io.IOException
 
@@ -47,7 +48,7 @@ class ImageUtil {
                     cameraUri = Uri.fromFile(outputImage)
                 }
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri)
-                startActivityForResult(intent, HomeFragment.TAKE_PHOTO)
+                startActivityForResult(intent, TAKE_PHOTO)
             }
             return cameraUri
         }
@@ -75,7 +76,7 @@ class ImageUtil {
                     cameraUri = Uri.fromFile(outputImage)
                 }
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, cameraUri)
-                fragment.startActivityForResult(intent, HomeFragment.TAKE_PHOTO)
+                fragment.startActivityForResult(intent, TAKE_PHOTO)
             }
             return cameraUri
         }
@@ -85,13 +86,13 @@ class ImageUtil {
         fun openAlbum(fragment: Fragment) {
             val intent = Intent("android.intent.action.GET_CONTENT")
             intent.type = "image/*"
-            fragment.startActivityForResult(intent, HomeFragment.CHOOSE_PHOTO)
+            fragment.startActivityForResult(intent, CHOOSE_PHOTO)
         }
 
         fun openAlbum(activity: Activity) {
             val intent = Intent("android.intent.action.GET_CONTENT")
             intent.type = "image/*"
-            activity.startActivityForResult(intent, HomeFragment.CHOOSE_PHOTO)
+            activity.startActivityForResult(intent, CHOOSE_PHOTO)
         }
 
         @TargetApi(19)

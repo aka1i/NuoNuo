@@ -69,4 +69,10 @@ interface RetrofitService {
         @Field("image") image: String,
         @Query("access_token") access_token: String
     ): Deferred<BaiduOCRResponse>
+
+    @POST("community/statement")
+    fun newTrend(
+        @Body newTrend: NewTrend,
+        @Header("Authorization") access_token: String
+    ): Deferred<NewTrendResponse>
 }

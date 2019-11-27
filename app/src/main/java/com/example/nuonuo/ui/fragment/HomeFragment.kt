@@ -27,6 +27,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 
 import com.example.nuonuo.R
+import com.example.nuonuo.marco.Constant.CHOOSE_PHOTO
+import com.example.nuonuo.marco.Constant.CROP_REQUEST_CODE
+import com.example.nuonuo.marco.Constant.TAKE_PHOTO
 import com.example.nuonuo.ui.activity.GetCarCodeActivity
 import com.example.nuonuo.utils.PopUpUtil
 import com.example.nuonuo.utils.ImageUtil
@@ -39,12 +42,6 @@ import java.io.IOException
  * A simple [Fragment] subclass.
  */
 class HomeFragment : Fragment(), View.OnClickListener{
-
-    companion object{
-        const val TAKE_PHOTO = 1
-        const val CHOOSE_PHOTO = 2
-        const val CROP_REQUEST_CODE = 3
-    }
 
     private lateinit var cameraUri: Uri
     private lateinit var cropUri: Uri

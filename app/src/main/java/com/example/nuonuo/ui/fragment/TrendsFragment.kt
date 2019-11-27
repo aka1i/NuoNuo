@@ -1,7 +1,10 @@
 package com.example.nuonuo.ui.fragment
 
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,14 +21,16 @@ import com.example.nuonuo.adapter.TrendAdapter
 import com.example.nuonuo.bean.TrendLab
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.TrendPresenterImpl
+import com.example.nuonuo.ui.activity.NewTrendActivity
 import com.example.nuonuo.view.TrendView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_treands.*
 import org.w3c.dom.Text
 
 /**
  * A simple [Fragment] subclass.
  */
-class TrendsFragment : Fragment(), TrendView{
+class TrendsFragment : Fragment(), TrendView, View.OnClickListener{
 
     private val name: String by Preference(Constant.USER_NAME_KEY,"")
 
@@ -38,6 +43,8 @@ class TrendsFragment : Fragment(), TrendView{
     private lateinit var nameText: TextView
 
     private var trendAdapter: TrendAdapter? = null
+
+    private lateinit var floatingActionButton: FloatingActionButton
 
     private val trendPresenterImpl:TrendPresenterImpl by lazy {
         TrendPresenterImpl(this)
@@ -60,6 +67,10 @@ class TrendsFragment : Fragment(), TrendView{
             refreshLayout = myView.findViewById(R.id.swipeRefreshLayout)
             trendList.layoutManager = LinearLayoutManager(activity)
             nameText = myView.findViewById(R.id.name_text)
+            floatingActionButton = myView.findViewById(R.id.floating_btn)
+
+            floatingActionButton.setOnClickListener(this@TrendsFragment)
+
             nameText.text = name
             trendAdapter = TrendAdapter(TrendLab.datas,this)
             trendList.adapter = trendAdapter
@@ -70,6 +81,14 @@ class TrendsFragment : Fragment(), TrendView{
         }
 
 
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.floating_btn ->{
+                startActivityForResult(Intent(activity, NewTrendActivity::class.java),Constant.START_NEW_TREND)
+            }
+        }
     }
 
     override fun getDataFailed(errorMessage: String?) {
@@ -90,5 +109,17 @@ class TrendsFragment : Fragment(), TrendView{
     override fun stopRefresh() {
         if(refreshLayout.isRefreshing)
             refreshLayout.isRefreshing = false
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when(requestCode){
+            Constant.START_NEW_TREND -> {
+                when(resultCode){
+                    RESULT_OK ->{
+                        trendPresenterImpl.getTrendListData()
+                    }
+                }
+            }
+        }
     }
 }

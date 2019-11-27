@@ -16,4 +16,10 @@ object Constant {
     const val HEAD_PIC_URL_KEY = "head_pic_url"
     const val BAIDU_API_EXPIRES_IN= "baidu_apiexpires_in"
     const val BAIDU_API_ACCESS_TOKEN = "baidu_api_access_token"
+
+
+    const val TAKE_PHOTO = 1
+    const val CHOOSE_PHOTO = 2
+    const val CROP_REQUEST_CODE = 3
+    const val START_NEW_TREND = 4
 }
