@@ -25,14 +25,17 @@ import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import com.bumptech.glide.Glide
 
 import com.example.nuonuo.R
 import com.example.nuonuo.marco.Constant.CHOOSE_PHOTO
 import com.example.nuonuo.marco.Constant.CROP_REQUEST_CODE
 import com.example.nuonuo.marco.Constant.TAKE_PHOTO
 import com.example.nuonuo.ui.activity.GetCarCodeActivity
+import com.example.nuonuo.utils.HeadImgUtil
 import com.example.nuonuo.utils.PopUpUtil
 import com.example.nuonuo.utils.ImageUtil
+import kotlinx.android.synthetic.main.activity_mine_setting.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.layout_bottom_dialog.view.*
 import java.io.File
@@ -60,6 +63,7 @@ class HomeFragment : Fragment(), View.OnClickListener{
     }
 
     fun init(){
+
         home_camera_cv.setOnClickListener(this)
     }
 

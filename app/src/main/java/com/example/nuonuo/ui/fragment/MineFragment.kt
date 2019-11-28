@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.mykotlin.base.Preference
 
 import com.example.nuonuo.R
@@ -15,6 +16,8 @@ import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.ui.activity.CarOwnerActivity
 import com.example.nuonuo.ui.activity.FirstActivity
 import com.example.nuonuo.ui.activity.SettingActivity
+import com.example.nuonuo.utils.HeadImgUtil
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 
@@ -23,6 +26,11 @@ class MineFragment : Fragment(), View.OnClickListener {
     private val name: String by Preference(Constant.USER_NAME_KEY,"")
 
     private var uid: Int by Preference(Constant.UID_KEY,0)
+
+    private var sexual: String by Preference(Constant.SEXUAL_KEY,"")
+
+    private var headPicUrl: String? by Preference(Constant.HEAD_PIC_URL_KEY,"")
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +46,9 @@ class MineFragment : Fragment(), View.OnClickListener {
     }
 
     fun init(){
+        val options = HeadImgUtil.getHeadImgOptions(sexual)
+        Glide.with(this).load(headPicUrl).apply(options).into(head_img)
+
         userNameText.text = name
         head_img.setOnClickListener(this)
         mine_out_rl.setOnClickListener(this)
@@ -59,8 +70,14 @@ class MineFragment : Fragment(), View.OnClickListener {
 
             }
             R.id.modify_info_rl -> {
-                startActivity(Intent(activity,SettingActivity::class.java))
+                activity?.startActivityForResult(Intent(activity,SettingActivity::class.java),Constant.START_SETTING)
             }
         }
     }
+
+    fun refreshSelfData(){
+        val options = HeadImgUtil.getHeadImgOptions(sexual)
+        Glide.with(this).load(headPicUrl).apply(options).into(head_img)
+    }
+
 }

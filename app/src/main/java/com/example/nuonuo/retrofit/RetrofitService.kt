@@ -75,4 +75,12 @@ interface RetrofitService {
         @Body newTrend: NewTrend,
         @Header("Authorization") access_token: String
     ): Deferred<NewTrendResponse>
+    
+
+    @Multipart
+    @POST("http://xyt.fzu.edu.cn:54321/v1/files")
+    fun uploadFile(
+        @Part file: MultipartBody.Part,
+        @Header("Authorization") access_token: String
+    ):Deferred<UploadFileResponse>
 }

@@ -22,4 +22,5 @@ object Constant {
     const val CHOOSE_PHOTO = 2
     const val CROP_REQUEST_CODE = 3
     const val START_NEW_TREND = 4
+    const val START_SETTING = 4
 }

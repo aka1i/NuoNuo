@@ -37,7 +37,7 @@ class MessageAdapter(var beans: List<MessageListResponse.MessageItemBean>, var c
         holder.contentText.text = bean.content
         holder.timeText.text = bean.stateTime
         Glide.with(context)
-            .load(R.drawable.test_bg)
+            .load(bean.headPicUrl)
             .into(holder.headImg)
     }
 

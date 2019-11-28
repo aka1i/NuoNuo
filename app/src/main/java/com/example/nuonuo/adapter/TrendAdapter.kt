@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.nuonuo.R
 import com.example.nuonuo.bean.TrendListResponse
+import com.example.nuonuo.utils.HeadImgUtil
+import kotlinx.android.synthetic.main.fragment_mine.*
 
 
 class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context): RecyclerView.Adapter<TrendAdapter.ViewHolder>() {
@@ -50,7 +52,7 @@ class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context
         holder.contentText.text = bean.content
         holder.timeText.text = bean.stateTime
         Glide.with(context)
-            .load(R.drawable.test_bg)
+            .load(bean.headPicUrl)
             .into(holder.headImg)
         holder.thumbNum.text = bean.id.toString()
         holder.shareNum.text = bean.id.toString()

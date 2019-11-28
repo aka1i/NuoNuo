@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.PopupWindow
@@ -21,6 +22,7 @@ import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.example.mykotlin.base.Preference
 import com.example.nuonuo.R
+import com.example.nuonuo.bean.FileBean
 import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.bean.UserInfo
 import com.example.nuonuo.marco.Constant
@@ -70,9 +72,9 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
 
     private lateinit var pop: PopupWindow
 
-
     private var selectHeadImg: String? = null
 
+    private var headBean: FileBean? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mine_setting)
@@ -80,6 +82,8 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
     }
 
     private fun init(){
+        val options = HeadImgUtil.getHeadImgOptions(sexual)
+        Glide.with(this).load(headPicUrl).apply(options).into(mine_setting_head)
         setting_title.setNavigationIcon(R.drawable.ic_navigate_before_white_24dp)
         setting_title.setNavigationOnClickListener {
             finish()
@@ -244,7 +248,10 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
             setting_wechatnumber_tv1.text.toString(),
             null
         )
-        modifyPresenterImpl.modify(userInfo,accessToken)
+        headBean = FileBean(headPicId,0,headPicUrl,selectHeadImg,null).run {
+            modifyPresenterImpl.modify(userInfo,accessToken, this)
+            this
+        }
     }
 
     override fun modifySuccess(result: LoginResponse) {
@@ -254,6 +261,13 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
         weixin = setting_wechatnumber_tv1.text.toString()
         Toast.makeText(this,"修改成功",Toast.LENGTH_SHORT).show()
         PopUpUtil.cancelProgressBar(window,progressBar)
+        headBean?.run {
+            headPicId = this.newId
+            headPicUrl = this.res
+        }
+        setResult(Activity.RESULT_OK)
+        finish()
+
 
     }
 

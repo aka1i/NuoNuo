@@ -94,8 +94,7 @@ object RetrofitHelper {
     fun getImageBody(path:String): MultipartBody.Part{
         var file = File(path)
         val imageBody = RequestBody.create(MediaType.parse("image/*"),file)
-        val image = MultipartBody.Part.createFormData("image","nuoImage",imageBody)
-        Log.d("imageFilePath",file.path)
+        val image = MultipartBody.Part.createFormData("file","test.jpg",imageBody)
         return image
     }
 

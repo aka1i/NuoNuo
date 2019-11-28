@@ -1,5 +1,6 @@
 package com.example.nuonuo.model
 
+import com.example.nuonuo.bean.FileBean
 import com.example.nuonuo.bean.UserInfo
 import com.example.nuonuo.presenter.MinePresenter
 
@@ -8,5 +9,5 @@ import com.example.nuonuo.presenter.MinePresenter
 @create 2019/11/26 - 20:49
  */
 interface MineModel {
-    fun modifyUserInfo(modifyListener: MinePresenter.OnModifyListener,userInfo: UserInfo,accessToken: String)
+    fun modifyUserInfo(modifyListener: MinePresenter.OnModifyListener,userInfo: UserInfo,accessToken: String,headFile: FileBean)
 }

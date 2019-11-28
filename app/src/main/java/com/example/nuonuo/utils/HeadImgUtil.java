@@ -16,7 +16,7 @@ public class HeadImgUtil {
 //        } else {
 //            options.error(R.drawable.default_headimg);
 //        }
-        options.error(R.drawable.test_bg);
+        options.error(R.drawable.head_img);
         return options;
     }
 

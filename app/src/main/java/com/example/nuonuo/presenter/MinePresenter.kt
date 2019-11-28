@@ -1,5 +1,6 @@
 package com.example.nuonuo.presenter
 
+import com.example.nuonuo.bean.FileBean
 import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.bean.UserInfo
 
@@ -11,7 +12,7 @@ interface MinePresenter {
 
     interface OnModifyListener{
 
-        fun modify(userInfo: UserInfo,accessToken: String)
+        fun modify(userInfo: UserInfo,accessToken: String,headFile: FileBean)
 
         fun modifySuccess(result: LoginResponse)
 

@@ -218,6 +218,7 @@
                         android:background="@null"
                         android:maxLength="11"
                         android:maxLines="1"
+                        android:inputType="number"
                         android:hint="请填入QQ号"/>
 
 

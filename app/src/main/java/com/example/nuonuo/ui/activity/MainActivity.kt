@@ -1,9 +1,12 @@
 package com.example.nuonuo.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import com.example.mykotlin.base.BaseActivity
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MainActivityPagerAdapter
+import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.ui.fragment.HomeFragment
 import com.example.nuonuo.ui.fragment.MessageFragment
 import com.example.nuonuo.ui.fragment.MineFragment
@@ -11,6 +14,14 @@ import com.example.nuonuo.ui.fragment.TrendsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
+
+    private val homeFragment = HomeFragment()
+
+    private val trendsFragment = TrendsFragment()
+
+    private val messageFragment = MessageFragment()
+
+    private val mineFragment = MineFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,10 +31,10 @@ class MainActivity : BaseActivity() {
 
     fun init(){
         val adapter = MainActivityPagerAdapter(supportFragmentManager)
-        adapter.addFragment(HomeFragment())
-        adapter.addFragment(TrendsFragment())
-        adapter.addFragment(MessageFragment())
-        adapter.addFragment(MineFragment())
+        adapter.addFragment(homeFragment)
+        adapter.addFragment(trendsFragment)
+        adapter.addFragment(messageFragment)
+        adapter.addFragment(mineFragment)
         viewPager.adapter = adapter
         viewPager.isScrollble = false
         viewPager.offscreenPageLimit = 4
@@ -43,6 +54,20 @@ class MainActivity : BaseActivity() {
                 }
             }
             true
+        }
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when(requestCode){
+            Constant.START_SETTING ->{
+                when(resultCode){
+                    Activity.RESULT_OK -> {
+                        trendsFragment.refreshSelfData()
+                        mineFragment.refreshSelfData()
+                    }
+                }
+            }
         }
     }
 }

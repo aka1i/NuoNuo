@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.mykotlin.base.Preference
 
 
@@ -13,9 +14,11 @@ import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MainActivityPagerAdapter
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.MessagePresenterImpl
+import com.example.nuonuo.utils.HeadImgUtil
 import com.example.nuonuo.view.MessageListView
 import kotlinx.android.synthetic.main.fragment_message.*
 import kotlinx.android.synthetic.main.fragment_message.viewPager
+import kotlinx.android.synthetic.main.fragment_mine.*
 import kotlinx.android.synthetic.main.tab_item.view.*
 
 class MessageFragment : Fragment(), MessageListView {
@@ -23,6 +26,8 @@ class MessageFragment : Fragment(), MessageListView {
     private var accessToken: String by Preference(Constant.ACCESS_TOKEN_KEY,"")
 
     private var uid: Int by Preference(Constant.UID_KEY,0)
+
+
 
     private val titleText = arrayOf("发送", "收到")
     private val icons =
@@ -51,6 +56,8 @@ class MessageFragment : Fragment(), MessageListView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         swipeRefreshLayout.setOnRefreshListener {
             when(viewPager.currentItem){

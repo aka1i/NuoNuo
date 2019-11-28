@@ -1,5 +1,6 @@
 package com.example.nuonuo.presenter
 
+import com.example.nuonuo.bean.FileBean
 import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.bean.UserInfo
 import com.example.nuonuo.model.MineModelImpl
@@ -13,8 +14,8 @@ class ModifyPresenterImpl(private val modifyView: ModifyView): MinePresenter.OnM
 
     private val mineModelImpl: MineModelImpl = MineModelImpl()
 
-    override fun modify(userInfo: UserInfo,accessToken: String) {
-        mineModelImpl.modifyUserInfo(this,userInfo,accessToken)
+    override fun modify(userInfo: UserInfo,accessToken: String,headFile: FileBean) {
+        mineModelImpl.modifyUserInfo(this,userInfo,accessToken,headFile)
     }
 
     override fun modifySuccess(result: LoginResponse) {
