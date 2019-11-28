@@ -15,7 +15,7 @@ import com.leochuan.ScaleLayoutManager
 import com.leochuan.ViewPagerLayoutManager
 import kotlinx.android.synthetic.main.activity_select_owner.*
 
-class SelectOwnerActivity : BaseActivity(), View.OnClickListener {
+class SelectOwnerActivity :AppCompatActivity(), View.OnClickListener {
     private val imgUrls = mutableListOf<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

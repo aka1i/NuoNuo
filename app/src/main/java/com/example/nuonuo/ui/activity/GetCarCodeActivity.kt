@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.mykotlin.base.BaseActivity
 import com.example.mykotlin.base.Preference
@@ -18,7 +19,7 @@ import com.example.nuonuo.view.GetCarCodeView
 import kotlinx.android.synthetic.main.activity_get_car_code.*
 import java.util.*
 
-class GetCarCodeActivity : BaseActivity(), View.OnClickListener,GetCarCodeView {
+class GetCarCodeActivity : AppCompatActivity(), View.OnClickListener,GetCarCodeView {
 
     private val baiduAPIPresenterImpl: GetCarCodePresenterImpl by lazy {
         GetCarCodePresenterImpl(this)

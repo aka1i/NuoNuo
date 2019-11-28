@@ -59,6 +59,7 @@ class MainActivity : BaseActivity() {
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode,data)
         when(requestCode){
             Constant.START_SETTING ->{
                 when(resultCode){
