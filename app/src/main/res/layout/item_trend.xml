@@ -73,31 +73,31 @@
             android:layout_gravity="right"
             android:layout_marginRight="10dp">
 
-            <TextView
-                android:id="@+id/thumb_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/thumb_normal"
-                android:text="12"
-                android:drawablePadding="5dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/thumb_num"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableLeft="@drawable/thumb_normal"-->
+<!--                android:text="12"-->
+<!--                android:drawablePadding="5dp"/>-->
 
-            <TextView
-                android:id="@+id/share_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/share_normal"
-                android:text="12"
-                android:drawablePadding="5dp"
-                android:layout_marginLeft="5dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/share_num"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableLeft="@drawable/share_normal"-->
+<!--                android:text="12"-->
+<!--                android:drawablePadding="5dp"-->
+<!--                android:layout_marginLeft="5dp"/>-->
 
-            <TextView
-                android:id="@+id/comment_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/comment_normal"
-                android:text="12"
-                android:drawablePadding="5dp"
-                android:layout_marginLeft="5dp"/>
+<!--            <TextView-->
+<!--                android:id="@+id/comment_num"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:drawableLeft="@drawable/comment_normal"-->
+<!--                android:text="12"-->
+<!--                android:drawablePadding="5dp"-->
+<!--                android:layout_marginLeft="5dp"/>-->
 
         </LinearLayout>
 

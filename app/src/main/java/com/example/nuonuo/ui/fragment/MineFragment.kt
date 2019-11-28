@@ -29,7 +29,7 @@ class MineFragment : Fragment(), View.OnClickListener {
 
     private var sexual: String by Preference(Constant.SEXUAL_KEY,"")
 
-    private var headPicUrl: String? by Preference(Constant.HEAD_PIC_URL_KEY,"")
+    private var headPicUrl: String by Preference(Constant.HEAD_PIC_URL_KEY,"")
 
 
     override fun onCreateView(
@@ -63,11 +63,9 @@ class MineFragment : Fragment(), View.OnClickListener {
                 activity?.finish()
             }
             R.id.head_img ->{
-                with(Intent(activity,CarOwnerActivity::class.java)){
-                    putExtra("uid",uid)
-                    startActivity(this)
+                activity?.run {
+                    startActivity(CarOwnerActivity.newIntent(this,uid,headPicUrl))
                 }
-
             }
             R.id.modify_info_rl -> {
                 activity?.startActivityForResult(Intent(activity,SettingActivity::class.java),Constant.START_SETTING)

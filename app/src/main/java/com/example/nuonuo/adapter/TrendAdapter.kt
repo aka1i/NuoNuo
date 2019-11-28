@@ -1,24 +1,42 @@
 package com.example.nuonuo.adapter
 
+import android.app.Activity
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
+import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.nuonuo.R
+import com.example.nuonuo.bean.MessageListResponse
 import com.example.nuonuo.bean.TrendListResponse
+import com.example.nuonuo.ui.activity.CarOwnerActivity
 import com.example.nuonuo.utils.HeadImgUtil
+import com.example.nuonuo.utils.PopUpUtil
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 
 class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context): RecyclerView.Adapter<TrendAdapter.ViewHolder>() {
 
+    var onItemClickListener: OnItemClickListener = object : OnItemClickListener{
+        override fun onclick(position: Int) {
+            context.startActivity(CarOwnerActivity.newIntent(context,beans[position].uid!!,beans[position].headPicUrl ?: ""))
+        }
 
+
+    }
+
+    interface OnItemClickListener{
+        fun onclick(position: Int)
+    }
 
     inner class ViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -28,9 +46,9 @@ class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context
         var headImg: ImageView
         var imgsRL: RecyclerView
         var leaveRL: RecyclerView
-        var thumbNum: TextView
-        var shareNum: TextView
-        var commentNum: TextView
+//        var thumbNum: TextView
+//        var shareNum: TextView
+//        var commentNum: TextView
         init {
             this.nameText = view.findViewById(R.id.name_text)
             this.contentText = view.findViewById(R.id.content_text)
@@ -38,9 +56,9 @@ class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context
             this.headImg = view.findViewById(R.id.head_img)
             this.imgsRL = view.findViewById(R.id.imgs_rl)
             this.leaveRL = view.findViewById(R.id.leave_rl)
-            this.thumbNum = view.findViewById(R.id.thumb_num)
-            this.shareNum = view.findViewById(R.id.share_num)
-            this.commentNum = view.findViewById(R.id.comment_num)
+//            this.thumbNum = view.findViewById(R.id.thumb_num)
+//            this.shareNum = view.findViewById(R.id.share_num)
+//            this.commentNum = view.findViewById(R.id.comment_num)
             imgsRL.layoutManager = GridLayoutManager(context,2)
             leaveRL.layoutManager = LinearLayoutManager(context)
         }
@@ -54,10 +72,12 @@ class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context
         Glide.with(context)
             .load(bean.headPicUrl)
             .into(holder.headImg)
-        holder.thumbNum.text = bean.id.toString()
-        holder.shareNum.text = bean.id.toString()
-        holder.commentNum.text = bean.id.toString()
-
+//        holder.thumbNum.text = bean.id.toString()
+//        holder.shareNum.text = bean.id.toString()
+//        holder.commentNum.text = bean.id.toString()
+        holder.itemView.setOnClickListener{
+            onItemClickListener.onclick(position)
+        }
 //        bean.otherPicIds?.apply {
 //            holder.imgsRL.adapter = ImgsAdapter(this,context)
 //

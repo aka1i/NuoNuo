@@ -92,6 +92,7 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
         setting_sex_tv1.setOnClickListener(this)
         modifyinfo_btn.setOnClickListener(this)
         setting_headimg_r1.setOnClickListener(this)
+        bindCarRL.setOnClickListener(this)
     }
 
     private fun refreshData(){
@@ -234,6 +235,9 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
             }
             R.id.setting_headimg_r1 ->{
                 showImagePop()
+            }
+            R.id.bindCarRL ->{
+                startActivity(Intent(this,BlindCarActivity::class.java))
             }
         }
     }

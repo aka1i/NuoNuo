@@ -9,7 +9,7 @@ import com.example.nuonuo.view.GetCarCodeView
 @author yjn
 @create 2019/11/27 - 16:55
  */
-class GetCarCodePresenterImpl(private val baiduAPIView: GetCarCodeView): BiaduAPIPresenter.OnGetTokenListener,BiaduAPIPresenter.OnORCListener {
+class GetCarCodePresenterImpl(private val baiduAPIView: GetCarCodeView): BaiduAPIPresenter.OnGetTokenListener,BaiduAPIPresenter.OnORCListener {
 
     private val baiduAPIModelImpl: BaiduAPIModelImpl = BaiduAPIModelImpl()
 

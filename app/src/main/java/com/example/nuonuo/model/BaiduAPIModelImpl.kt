@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.nuonuo.bean.BaiduOCRResponse
 import com.example.nuonuo.bean.BaiduTokenResponse
 import com.example.nuonuo.marco.Constant
-import com.example.nuonuo.presenter.BiaduAPIPresenter
+import com.example.nuonuo.presenter.BaiduAPIPresenter
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -12,12 +12,6 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import com.example.nuonuo.utils.baidu.Base64Util
 import com.example.nuonuo.utils.baidu.FileUtil
-import java.net.URLEncoder
-import com.example.nuonuo.utils.baidu.HttpUtil
-import com.google.gson.Gson
-import okhttp3.MediaType
-import okhttp3.RequestBody
-import retrofit2.Retrofit
 
 
 /**
@@ -27,7 +21,7 @@ import retrofit2.Retrofit
 class BaiduAPIModelImpl: BaiduAPIModel{
     private  var baiduTokenResponseAsyn: Deferred<BaiduTokenResponse>? = null
     private  var baiduOCRResponseAsyn: Deferred<BaiduOCRResponse>? = null
-    override fun getToken(onGetTokenListener: BiaduAPIPresenter.OnGetTokenListener) {
+    override fun getToken(onGetTokenListener: BaiduAPIPresenter.OnGetTokenListener) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 baiduTokenResponseAsyn = RetrofitHelper.retrofitService.getBaiduToken()
@@ -50,7 +44,7 @@ class BaiduAPIModelImpl: BaiduAPIModel{
     }
 
 
-        override fun getORC(onORCListener: BiaduAPIPresenter.OnORCListener,path: String,access_token:String) {
+        override fun getORC(onORCListener: BaiduAPIPresenter.OnORCListener, path: String, access_token:String) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val imgData = FileUtil.readFileByBytes(path)

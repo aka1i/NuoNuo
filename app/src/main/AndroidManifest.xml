@@ -22,7 +22,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.NewTrendActivity"></activity>
+        <activity android:name=".ui.activity.BlindCarActivity"></activity>
+        <activity android:name=".ui.activity.NewTrendActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.SelectOwnerActivity" />
         <activity android:name=".ui.activity.GetCarCodeActivity" />

@@ -259,6 +259,34 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/bindCarRL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/click_relativelayout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:text="绑定车牌"
+                        android:textSize="16sp"/>
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/ic_navigate_next_grey_500_24dp"/>
+
+                </RelativeLayout>
+
             </LinearLayout>
 
         </ScrollView>

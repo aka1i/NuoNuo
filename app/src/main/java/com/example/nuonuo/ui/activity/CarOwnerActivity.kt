@@ -1,9 +1,12 @@
 package com.example.nuonuo.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +19,7 @@ import com.example.mykotlin.base.Preference
 import com.example.nuonuo.R
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.CarOwnerPresenterImpl
+import com.example.nuonuo.utils.HeadImgUtil
 import com.example.nuonuo.utils.PopUpUtil
 import com.example.nuonuo.view.CarOwnerView
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -23,8 +27,17 @@ import kotlinx.android.synthetic.main.activity_car_owner.*
 import kotlin.properties.Delegates
 
 class CarOwnerActivity : BaseActivity(), View.OnClickListener,CarOwnerView {
-    private var uid by Delegates.notNull<Int>()
 
+    companion object{
+        fun newIntent(context: Context, uid: Int, headUrl: String): Intent{
+            val intent = Intent(context,CarOwnerActivity::class.java)
+            intent.putExtra("uid",uid)
+            intent.putExtra("headUrl", headUrl)
+            return intent
+        }
+    }
+
+    private var uid by Delegates.notNull<Int>()
 
     private var accessToken: String by Preference(Constant.ACCESS_TOKEN_KEY,"")
 
@@ -42,6 +55,11 @@ class CarOwnerActivity : BaseActivity(), View.OnClickListener,CarOwnerView {
     }
 
     fun init(){
+        val options = HeadImgUtil.getHeadImgOptions("")
+        Glide.with(this)
+            .load(intent.getStringExtra("headUrl"))
+            .apply(options)
+            .into(car_owner_head_img)
         Glide.with(this)
             .load(R.drawable.test_bg)
             .apply(RequestOptions.bitmapTransform(BlurTransformation(10)))
@@ -104,4 +122,7 @@ class CarOwnerActivity : BaseActivity(), View.OnClickListener,CarOwnerView {
         Toast.makeText(this,"留言成功", Toast.LENGTH_SHORT).show()
         popWindow?.dismiss()
     }
+
+
+
 }

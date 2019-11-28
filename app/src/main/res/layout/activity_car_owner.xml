@@ -17,8 +17,8 @@
             android:id="@+id/car_owner_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/test_bg"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/test_bg" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/car_owner_head_img"
@@ -35,8 +35,7 @@
             android:layout_below="@+id/car_owner_head_img"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:text="Aka1i"/>
+            android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -49,14 +48,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:text="动态16"
+                android:text="动态0"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="积分216"
+                android:text="积分0"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
 
@@ -83,7 +82,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="1313131313546843"
             android:layout_marginLeft="20dp"/>
 
     </LinearLayout>
@@ -161,5 +159,12 @@
                 android:drawablePadding="15dp"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
+<!--    <ProgressBar-->
+<!--        android:id="@+id/progressBar"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:visibility="gone"/>-->
 
 </RelativeLayout>

@@ -8,7 +8,7 @@ import com.example.nuonuo.bean.BaiduTokenResponse
 @author yjn
 @create 2019/11/27 - 16:54
  */
-interface BiaduAPIPresenter {
+interface BaiduAPIPresenter {
 
     interface OnGetTokenListener{
         fun getToken()

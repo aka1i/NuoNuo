@@ -14,8 +14,6 @@ import com.example.nuonuo.R
 
 class ImgsAdapter(var beans: List<String>, var context: Context): RecyclerView.Adapter<ImgsAdapter.ViewHolder>() {
 
-
-
     inner class ViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         var img: ImageView

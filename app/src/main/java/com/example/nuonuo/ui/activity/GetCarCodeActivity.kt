@@ -55,10 +55,6 @@ class GetCarCodeActivity : AppCompatActivity(), View.OnClickListener,GetCarCodeV
                 "$externalCacheDir/small.jpg",
                 externalCacheDir.path
             ),baidu_api_access_token)
-        Log.d("GETORC",BitmapUtil.compressImage(
-            "$externalCacheDir/small.jpg",
-            externalCacheDir.path
-        ))
     }
 
     override fun onClick(v: View?) {
@@ -77,10 +73,8 @@ class GetCarCodeActivity : AppCompatActivity(), View.OnClickListener,GetCarCodeV
 
 
     override fun getTokenSuccess(baiduTokenResponse: BaiduTokenResponse) {
-        Toast.makeText(this,baiduTokenResponse.toString(),Toast.LENGTH_SHORT).show()
-        baidu_api_expires_in = Date().time + (baiduTokenResponse.expires_in * 1000)
+        baidu_api_expires_in = Date().time + (baiduTokenResponse.expires_in.toLong() * 1000)
         baidu_api_access_token = baiduTokenResponse.access_token
-        Toast.makeText(this,baiduTokenResponse.toString(),Toast.LENGTH_SHORT).show()
         baiduAPIPresenterImpl.getORC(BitmapUtil.compressImage(
             "$externalCacheDir/small.jpg",
             externalCacheDir.path
