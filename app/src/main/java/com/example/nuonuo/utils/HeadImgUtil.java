@@ -20,27 +20,4 @@ public class HeadImgUtil {
         return options;
     }
 
-//    public static RequestOptions getAlumniAssociationHeadImgOptions(){
-//        RequestOptions options = new RequestOptions();
-//        options.transform(new GlideCircleTransform());
-//            options.error(R.drawable.fzu_detail);
-//        return options;
-//    }
-//
-//    public static RequestOptions getEnterpriseCoverImgOptions(){
-//        RequestOptions options = new RequestOptions()
-//                .centerCrop()
-//                .placeholder(R.color.color_f6)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL);
-//        options.error(R.drawable.default_activity_cover);
-//        return options;
-//    }
-//
-//    public static RequestOptions getEnterpriseHeadImgOptions(){
-//        RequestOptions options = new RequestOptions()
-//                .centerCrop()
-//                .placeholder(R.color.color_f6)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL);
-//        return options;
-//    }
 }

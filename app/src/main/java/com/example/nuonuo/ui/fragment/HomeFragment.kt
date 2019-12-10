@@ -155,7 +155,7 @@ class HomeFragment : Fragment(), View.OnClickListener{
             when (requestCode) {
                 TAKE_PHOTO -> if (resultCode == RESULT_OK) {
                     try {
-                        cropUri = ImageUtil.cropPhotoForRectangle(this@HomeFragment,cameraUri,4,3)
+                        cropUri = ImageUtil.cropPhotoForRectangle(this@HomeFragment,cameraUri,3,4)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -182,7 +182,7 @@ class HomeFragment : Fragment(), View.OnClickListener{
                             } else {
                                 Uri.fromFile(file)
                             }
-                            cropUri = ImageUtil.cropPhotoForRectangle(this@HomeFragment,cropUri,4,3)
+                            cropUri = ImageUtil.cropPhotoForRectangle(this@HomeFragment,cropUri,3,4)
                         }
                     }
                 }

@@ -1,5 +1,7 @@
 package com.example.nuonuo.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,16 +9,41 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
-import com.example.mykotlin.base.BaseActivity
+import android.widget.Toast
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.EasyImgAdapter
+import com.example.nuonuo.base.BaseActivity
+import com.example.nuonuo.bean.GetCarOnwerResponse
+import com.example.nuonuo.presenter.SelectCarOwnerPresenterImpl
+import com.example.nuonuo.utils.PopUpUtil
+import com.example.nuonuo.view.SelectCarOwnerView
 import com.leochuan.CenterSnapHelper
 import com.leochuan.ScaleLayoutManager
 import com.leochuan.ViewPagerLayoutManager
 import kotlinx.android.synthetic.main.activity_select_owner.*
 
-class SelectOwnerActivity :AppCompatActivity(), View.OnClickListener {
+class SelectOwnerActivity :BaseActivity(), View.OnClickListener, SelectCarOwnerView {
+
+    companion object{
+        fun newIntent(context: Context,id: String):Intent{
+            val intent = Intent(context,SelectOwnerActivity::class.java)
+            intent.putExtra("photoId",id)
+            return intent
+        }
+    }
+
+    private var id: String = ""
+
+    private val selectCarOwnerPresenterImpl: SelectCarOwnerPresenterImpl by lazy {
+        SelectCarOwnerPresenterImpl(this)
+    }
+
     private val imgUrls = mutableListOf<String>()
+
+    private lateinit var adapter: EasyImgAdapter
+
+    private lateinit var datas: List<GetCarOnwerResponse.Data>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_owner)
@@ -32,17 +59,19 @@ class SelectOwnerActivity :AppCompatActivity(), View.OnClickListener {
     }
 
     private fun init(){
-        val ids = listOf(R.drawable.login_bg,R.drawable.test_bg)
-        for (id in ids) {
-            val uri = Uri.parse("android.resource://$packageName/$id")
-            imgUrls.add(uri.toString())
-        }
-        val adapter = EasyImgAdapter(this, imgUrls)
+        id = intent.getStringExtra("photoId")
+
+//        val ids = listOf(R.drawable.login_bg,R.drawable.test_bg)
+//        for (id in ids) {
+//            val uri = Uri.parse("android.resource://$packageName/$id")
+//            imgUrls.add(uri.toString())
+//        }
+        adapter = EasyImgAdapter(this, imgUrls)
+        adapter.setOnItemClickedListener { position -> startActivity(CarOwnerActivity.newIntent(this@SelectOwnerActivity,datas[position].uid,datas[position].name,datas[position].headPicUrl ?: "")) }
         val layoutManager = ScaleLayoutManager.Builder(this, 5)
             .setMaxVisibleItemCount(5)
             .setMoveSpeed(0.5.toFloat())
             .build()
-        initIndicate()
         layoutManager.setOnPageChangeListener(object : ViewPagerLayoutManager.OnPageChangeListener{
             override fun onPageScrollStateChanged(p0: Int) {
 
@@ -59,6 +88,9 @@ class SelectOwnerActivity :AppCompatActivity(), View.OnClickListener {
         CenterSnapHelper().attachToRecyclerView(owner_list)
 
         car_photo_back.setOnClickListener(this)
+        getCarOwnerList(id)
+
+        PopUpUtil.showProgressBar(window,progressBar)
     }
 
     private fun initIndicate(){
@@ -74,5 +106,28 @@ class SelectOwnerActivity :AppCompatActivity(), View.OnClickListener {
             view.layoutParams = lp
             indicator.addView(view,i)
         }
+    }
+
+    override fun getCarOwnerList(id: String) {
+        selectCarOwnerPresenterImpl.getCarOwnerList(id)
+    }
+
+    override fun getCarOwnerListSuccess(getCarOnwerResponse: GetCarOnwerResponse) {
+        imgUrls.clear()
+        getCarOnwerResponse.data?.run {
+            datas = this
+            this
+        }?.forEach {
+            imgUrls.add(it.otherPicNames[0])
+        }
+        initIndicate()
+        adapter.notifyDataSetChanged()
+        PopUpUtil.cancelProgressBar(window,progressBar)
+    }
+
+    override fun getCarOwnerListFailed(errorString: String?) {
+        Toast.makeText(this,errorString,Toast.LENGTH_SHORT).show()
+        finish()
+        PopUpUtil.cancelProgressBar(window,progressBar)
     }
 }

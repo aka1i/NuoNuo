@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,7 @@ import android.view.WindowManager
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.mykotlin.base.BaseActivity
+import com.example.mykotlin.base.BaseWithImmersionActivity
 import com.example.mykotlin.base.Preference
 import com.example.nuonuo.R
 import com.example.nuonuo.marco.Constant
@@ -26,13 +24,14 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_car_owner.*
 import kotlin.properties.Delegates
 
-class CarOwnerActivity : BaseActivity(), View.OnClickListener,CarOwnerView {
+class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOwnerView {
 
     companion object{
-        fun newIntent(context: Context, uid: Int, headUrl: String): Intent{
+        fun newIntent(context: Context, uid: Int, name: String,headUrl: String): Intent{
             val intent = Intent(context,CarOwnerActivity::class.java)
             intent.putExtra("uid",uid)
             intent.putExtra("headUrl", headUrl)
+            intent.putExtra("name",name)
             return intent
         }
     }
@@ -66,6 +65,7 @@ class CarOwnerActivity : BaseActivity(), View.OnClickListener,CarOwnerView {
             .into(car_owner_bg)
         uid = intent.getIntExtra("uid",0)
         message_rl.setOnClickListener(this)
+        car_owner_name.text = intent.getStringExtra("name")
     }
 
     override fun onClick(v: View?) {

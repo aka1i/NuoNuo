@@ -33,12 +33,13 @@
                 android:text="重拍"
                 android:textSize="18sp"
                 android:layout_centerVertical="true"
+                android:visibility="invisible"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
         <ImageView
             android:id="@+id/photoImg"
-            android:layout_width="280dp"
-            android:layout_height="210dp"
+            android:layout_width="210dp"
+            android:layout_height="280dp"
             android:layout_below="@+id/car_photo_top_rl"
             android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"/>
@@ -48,9 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/photoImg"
+            android:layout_centerHorizontal="true"
             android:textSize="16sp"
-            android:textColor="@color/black"
-            android:text="11111"/>
+            android:textColor="@color/black" />
 
         <ImageView
             android:layout_below="@id/photoImg"
@@ -59,7 +60,14 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:src="@drawable/car_photo_tick"
+            android:visibility="invisible"
             android:layout_centerHorizontal="true"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 

@@ -1,34 +1,26 @@
 package com.example.nuonuo.adapter
 
-import android.app.Activity
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
-import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.nuonuo.R
-import com.example.nuonuo.bean.MessageListResponse
 import com.example.nuonuo.bean.TrendListResponse
 import com.example.nuonuo.ui.activity.CarOwnerActivity
 import com.example.nuonuo.utils.HeadImgUtil
-import com.example.nuonuo.utils.PopUpUtil
-import kotlinx.android.synthetic.main.fragment_mine.*
 
 
 class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context): RecyclerView.Adapter<TrendAdapter.ViewHolder>() {
 
     var onItemClickListener: OnItemClickListener = object : OnItemClickListener{
         override fun onclick(position: Int) {
-            context.startActivity(CarOwnerActivity.newIntent(context,beans[position].uid!!,beans[position].headPicUrl ?: ""))
+            context.startActivity(CarOwnerActivity.newIntent(context,beans[position].uid!!,beans[position].name ?: "",beans[position].headPicUrl ?: ""))
         }
 
 
@@ -69,8 +61,10 @@ class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context
         holder.nameText.text =  bean.name
         holder.contentText.text = bean.content
         holder.timeText.text = bean.stateTime
+        val options = HeadImgUtil.getHeadImgOptions("")
         Glide.with(context)
             .load(bean.headPicUrl)
+            .apply(options)
             .into(holder.headImg)
 //        holder.thumbNum.text = bean.id.toString()
 //        holder.shareNum.text = bean.id.toString()

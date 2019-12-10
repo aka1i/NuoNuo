@@ -1,16 +1,15 @@
 package com.example.nuonuo.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.mykotlin.base.BaseActivity
+import com.example.mykotlin.base.BaseWithImmersionActivity
 import com.example.nuonuo.R
 import com.example.nuonuo.presenter.ForgotPasswordPresenterImpl
 import com.example.nuonuo.view.ForgotPasswordView
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
-class ForgotPasswordActivity : BaseActivity(),ForgotPasswordView,View.OnClickListener {
+class ForgotPasswordActivity : BaseWithImmersionActivity(),ForgotPasswordView,View.OnClickListener {
 
     private val forgotPasswordPresenterImpl: ForgotPasswordPresenterImpl by lazy {
         ForgotPasswordPresenterImpl(this)

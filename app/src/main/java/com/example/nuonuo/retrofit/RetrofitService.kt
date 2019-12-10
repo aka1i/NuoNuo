@@ -47,10 +47,14 @@ interface RetrofitService {
 
 
     @GET("v1/message")
-    fun getMessageList(
+    fun getMessageReciveList(
         @Header("Authorization") access_token: String
     ): Deferred<MessageListResponse>
 
+    @GET("v1/message/send")
+    fun getMessageSendList(
+        @Header("Authorization") access_token: String
+    ): Deferred<MessageListResponse>
 
     @POST("v1/message/reply/{id}")
     fun sendMessage(
@@ -83,4 +87,21 @@ interface RetrofitService {
         @Part file: MultipartBody.Part,
         @Header("Authorization") access_token: String
     ):Deferred<UploadFileResponse>
+
+
+    @GET("v1/photo/info")
+    fun getSelfCarCode(
+        @Header("Authorization") access_token: String
+    ): Deferred<SelfCarCodeResponse>
+
+    @POST("v1/photo/upload")
+    fun blindCode(
+        @Body requestBody: RequestBody,
+        @Header("Authorization") access_token: String
+    ): Deferred<LoginResponse>
+
+    @GET("v1/photo/{photoId}")
+    fun getOwnerList(
+        @Path("photoId")id:String
+    ): Deferred<GetCarOnwerResponse>
 }

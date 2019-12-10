@@ -1,12 +1,10 @@
 package com.example.nuonuo.ui.activity
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.mykotlin.base.BaseActivity
+import com.example.mykotlin.base.BaseWithImmersionActivity
 import com.example.nuonuo.R
 import com.example.nuonuo.bean.RegisterResponse
 import com.example.nuonuo.presenter.RegisterPresenterImpl
@@ -16,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 
 
 
-class RegisterActivity : BaseActivity(), RegisterView,View.OnClickListener{
+class RegisterWithImmersActivity : BaseWithImmersionActivity(), RegisterView,View.OnClickListener{
 
     private val registerPresenterImpl: RegisterPresenterImpl by lazy {
         RegisterPresenterImpl(this)

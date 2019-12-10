@@ -46,10 +46,10 @@ class MessageListFragment(private val type: Int) : Fragment() {
             recyclerView?.layoutManager = LinearLayoutManager(this)
             when(type){
                 TYPE_SEND -> {
-                    messageAdapter = MessageAdapter(MessageLab.sendMessages,this)
+                    messageAdapter = MessageAdapter(MessageLab.sendMessages,this,0)
                 }
                 TYPE_RECEIVE -> {
-                    messageAdapter = MessageAdapter(MessageLab.receiveMessage,this)
+                    messageAdapter = MessageAdapter(MessageLab.receiveMessage,this,1)
                 }
             }
             recyclerView?.adapter = messageAdapter

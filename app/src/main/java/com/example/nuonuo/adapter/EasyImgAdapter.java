@@ -23,6 +23,18 @@ import java.util.List;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class EasyImgAdapter extends RecyclerView.Adapter<EasyImgAdapter.ViewHolder>{
+
+    OnItemClickedListener onItemClickedListener = null;
+
+    public interface OnItemClickedListener{
+        public void onclick(int position);
+    }
+
+
+    public void setOnItemClickedListener(OnItemClickedListener onItemClickedListener) {
+        this.onItemClickedListener = onItemClickedListener;
+    }
+
     private List<String> strings;
     private Context context;
     public EasyImgAdapter(Context context, List<String> strings){
@@ -57,7 +69,9 @@ public class EasyImgAdapter extends RecyclerView.Adapter<EasyImgAdapter.ViewHold
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ImgDetailUtil.startImgDetail(context,strings,position);
+//                ImgDetailUtil.startImgDetail(context,strings,position);
+                if (onItemClickedListener != null)
+                    onItemClickedListener.onclick(position);
             }
         });
     }

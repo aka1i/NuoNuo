@@ -29,7 +29,7 @@
         <activity android:name=".ui.activity.GetCarCodeActivity" />
         <activity android:name=".ui.activity.ForgotPasswordActivity" />
         <activity android:name=".ui.activity.CarOwnerActivity" />
-        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.RegisterWithImmersActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity
             android:name=".ui.activity.FirstActivity"

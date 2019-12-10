@@ -1,29 +1,20 @@
-package com.example.mykotlin.base
+package com.example.nuonuo.base
 
-import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.gyf.immersionbar.ImmersionBar
 
+/**
+@author yjn
+@create 2019/12/10 - 15:56
+ */
+open class BaseActivity : AppCompatActivity(), ErrorCallBackView {
 
-open class BaseActivity : AppCompatActivity()  {
-    protected lateinit var immersionBar: ImmersionBar
+    private val TAG = "BaseActivity_"
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initImmersionBar()
+    override fun errorCallBack_1001(errorMessage: String?) {
+        Toast.makeText(this,errorMessage,Toast.LENGTH_SHORT).show()
+
+        Log.d(TAG + "1001",errorMessage)
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    open protected fun initImmersionBar() {
-        //在BaseActivity里初始化
-        immersionBar = ImmersionBar.with(this)
-        immersionBar
-            .init()
-    }
-
-
-
 }

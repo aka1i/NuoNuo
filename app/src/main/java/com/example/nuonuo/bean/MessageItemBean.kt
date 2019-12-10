@@ -12,6 +12,7 @@ data class MessageListResponse(
         var getId: Int?,
         var content: String,
         var sendName:String,
+        var getName:String,
         var stateTime: String,
         var headPicUrl: String,
         var headPicId: Int?

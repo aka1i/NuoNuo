@@ -1,8 +1,6 @@
 package com.example.nuonuo.ui.fragment
 
-import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,7 +15,6 @@ import com.example.nuonuo.ui.activity.CarOwnerActivity
 import com.example.nuonuo.ui.activity.FirstActivity
 import com.example.nuonuo.ui.activity.SettingActivity
 import com.example.nuonuo.utils.HeadImgUtil
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 
@@ -64,7 +61,7 @@ class MineFragment : Fragment(), View.OnClickListener {
             }
             R.id.head_img ->{
                 activity?.run {
-                    startActivity(CarOwnerActivity.newIntent(this,uid,headPicUrl))
+                    startActivity(CarOwnerActivity.newIntent(this,uid,headPicUrl,name))
                 }
             }
             R.id.modify_info_rl -> {

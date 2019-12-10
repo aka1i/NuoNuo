@@ -3,7 +3,7 @@ package com.example.nuonuo.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.example.mykotlin.base.BaseActivity
+import com.example.mykotlin.base.BaseWithImmersionActivity
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MainActivityPagerAdapter
 import com.example.nuonuo.marco.Constant
@@ -13,7 +13,7 @@ import com.example.nuonuo.ui.fragment.MineFragment
 import com.example.nuonuo.ui.fragment.TrendsFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseWithImmersionActivity() {
 
     private val homeFragment = HomeFragment()
 

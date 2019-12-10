@@ -2,22 +2,18 @@ package com.example.nuonuo.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.mykotlin.base.BaseActivity
+import com.example.mykotlin.base.BaseWithImmersionActivity
 import com.example.mykotlin.base.Preference
 import com.example.nuonuo.R
 import com.example.nuonuo.bean.LoginResponse
-import com.example.nuonuo.bean.RegisterResponse
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.LoginPresenterImpl
-import com.example.nuonuo.presenter.RegisterPresenterImpl
 import com.example.nuonuo.view.LoginView
-import com.example.nuonuo.view.RegisterView
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : BaseActivity(),LoginView, View.OnClickListener {
+class LoginActivity : BaseWithImmersionActivity(),LoginView, View.OnClickListener {
 
     private var uid: Int by Preference(Constant.UID_KEY,0)
 

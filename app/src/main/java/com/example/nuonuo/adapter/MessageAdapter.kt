@@ -5,21 +5,19 @@ import androidx.recyclerview.widget.RecyclerView
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.nuonuo.R
 import com.example.nuonuo.bean.MessageListResponse
 import com.example.nuonuo.ui.activity.CarOwnerActivity
+import com.example.nuonuo.utils.HeadImgUtil
 import com.example.nuonuo.utils.PopUpUtil
 
 
-class MessageAdapter(var beans: List<MessageListResponse.MessageItemBean>, var context: Context): RecyclerView.Adapter<MessageAdapter.ViewHolder>(){
+class MessageAdapter(var beans: List<MessageListResponse.MessageItemBean>, var context: Context,val type:Int): RecyclerView.Adapter<MessageAdapter.ViewHolder>(){
 
     var onItemClickListener: OnItemClickListener = object : OnItemClickListener{
         override fun onclick(position: Int) {
@@ -63,7 +61,12 @@ class MessageAdapter(var beans: List<MessageListResponse.MessageItemBean>, var c
             val clickListener = View.OnClickListener { view ->
                 when(context){
                     is Activity -> {
-                        context.startActivity(CarOwnerActivity.newIntent(context,messageItemBean.sendId!!,messageItemBean.headPicUrl))
+                        if (type == 0)
+                        context.startActivity(CarOwnerActivity.newIntent(context,messageItemBean.sendId!!,
+                            messageItemBean.getName,messageItemBean.headPicUrl))
+                        else
+                            context.startActivity(CarOwnerActivity.newIntent(context,messageItemBean.sendId!!,
+                                messageItemBean.sendName,messageItemBean.headPicUrl))
                     }
                 }
                 PopUpUtil.closePopupWindow(pop)
@@ -96,11 +99,18 @@ class MessageAdapter(var beans: List<MessageListResponse.MessageItemBean>, var c
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bean = beans[position]
-        holder.nameText.text =  bean.sendName
+        if (type == 0)
+        {
+            holder.nameText.text =  bean.getName
+        }else{
+            holder.nameText.text =  bean.sendName
+        }
+        val options = HeadImgUtil.getHeadImgOptions("")
         holder.contentText.text = bean.content
         holder.timeText.text = bean.stateTime
         Glide.with(context)
             .load(bean.headPicUrl)
+            .apply(options)
             .into(holder.headImg)
         holder.itemView.setOnClickListener{
             onItemClickListener.onclick(position)

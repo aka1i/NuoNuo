@@ -321,15 +321,12 @@ class SettingActivity : AppCompatActivity(), View.OnClickListener,ModifyView{
             }
             CROP_REQUEST_CODE ->{
                 if (resultCode == Activity.RESULT_OK) {
-                    Toast.makeText(this,"切图成功",Toast.LENGTH_SHORT).show()
                     selectHeadImg = BitmapUtil.compressImage(
                         "$externalCacheDir/small.jpg",
                         externalCacheDir.path
                     )
                     val options = HeadImgUtil.getHeadImgOptions("")
                     Glide.with(this).load(selectHeadImg).apply(options).into(mine_setting_head)
-                }else{
-                    Toast.makeText(this,"切图失败",Toast.LENGTH_SHORT).show()
                 }
             }
 

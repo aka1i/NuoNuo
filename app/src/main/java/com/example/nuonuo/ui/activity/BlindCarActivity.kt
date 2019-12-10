@@ -19,30 +19,42 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.mykotlin.base.Preference
 import com.example.nuonuo.R
-import com.example.nuonuo.bean.BaiduOCRResponse
-import com.example.nuonuo.bean.BaiduTokenResponse
+import com.example.nuonuo.base.BaseActivity
+import com.example.nuonuo.bean.*
 import com.example.nuonuo.marco.Constant
+import com.example.nuonuo.model.BlindCarModelImpl
+import com.example.nuonuo.presenter.BlindCarPresenterImpl
 import com.example.nuonuo.presenter.GetCarCodePresenterImpl
 import com.example.nuonuo.utils.*
+import com.example.nuonuo.view.BlindCarView
 import com.example.nuonuo.view.GetCarCodeView
 import kotlinx.android.synthetic.main.activity_blind_car.*
+import kotlinx.android.synthetic.main.activity_blind_car.progressBar
+import kotlinx.android.synthetic.main.activity_mine_setting.*
 import kotlinx.android.synthetic.main.layout_bottom_dialog.view.*
 import java.io.File
 import java.util.*
 
-class BlindCarActivity : AppCompatActivity(),View.OnClickListener,GetCarCodeView {
+class BlindCarActivity : BaseActivity(),View.OnClickListener,GetCarCodeView,BlindCarView {
 
     private val baiduAPIPresenterImpl: GetCarCodePresenterImpl by lazy {
         GetCarCodePresenterImpl(this)
     }
 
+    private val blindPresenterImpl: BlindCarPresenterImpl by lazy {
+        BlindCarPresenterImpl(this)
+    }
 
     private var baidu_api_access_token: String by Preference(Constant.BAIDU_API_ACCESS_TOKEN,"")
 
     private var baidu_api_expires_in: Long by Preference(Constant.BAIDU_API_EXPIRES_IN,0)
 
+    private var accessToken: String by Preference(Constant.ACCESS_TOKEN_KEY,"")
+
+    private var fileBean: FileBean = FileBean(null,null,null,null,null)
     private lateinit var cameraUri: Uri
     private lateinit var cropUri: Uri
     private var selectHeadImg: String? = null
@@ -55,6 +67,8 @@ class BlindCarActivity : AppCompatActivity(),View.OnClickListener,GetCarCodeView
 
     private fun init(){
         take_photo.setOnClickListener(this)
+        applyButton.setOnClickListener(this)
+        getSelfCarCode(accessToken)
     }
 
 
@@ -62,6 +76,9 @@ class BlindCarActivity : AppCompatActivity(),View.OnClickListener,GetCarCodeView
         when(v?.id){
             R.id.take_photo ->{
                 showImagePop()
+            }
+            R.id.applyButton ->{
+                blindPresenterImpl.blindCar(car_code_text.text.toString(),fileBean,accessToken)
             }
         }
     }
@@ -177,6 +194,7 @@ class BlindCarActivity : AppCompatActivity(),View.OnClickListener,GetCarCodeView
                         "$externalCacheDir/small.jpg",
                         externalCacheDir.path
                     )
+                    fileBean.newFilePath = selectHeadImg
                     val options = HeadImgUtil.getHeadImgOptions("")
                     Glide.with(this).load(selectHeadImg).apply(options).into(carPhoto)
                     PopUpUtil.showProgressBar(window,progressBar)
@@ -187,8 +205,6 @@ class BlindCarActivity : AppCompatActivity(),View.OnClickListener,GetCarCodeView
                             "$externalCacheDir/small.jpg",
                             externalCacheDir.path
                         ),baidu_api_access_token)
-                }else{
-                    Toast.makeText(this,"切图失败", Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -238,6 +254,7 @@ class BlindCarActivity : AppCompatActivity(),View.OnClickListener,GetCarCodeView
         else{
             car_code_text.text = result
             applyButton.visibility = View.VISIBLE
+            take_photo.visibility = View.VISIBLE
         }
         PopUpUtil.cancelProgressBar(window,progressBar)
     }
@@ -245,5 +262,49 @@ class BlindCarActivity : AppCompatActivity(),View.OnClickListener,GetCarCodeView
     override fun getCarCodeFailed(errorMessage: String?) {
         Toast.makeText(this,errorMessage,Toast.LENGTH_SHORT).show()
         PopUpUtil.cancelProgressBar(window,progressBar)
+    }
+
+    override fun blindCar(code: String, fileBean: FileBean,accessToken:String) {
+        PopUpUtil.showProgressBar(window,progressBar)
+        blindPresenterImpl.blindCar(code,fileBean,accessToken)
+    }
+
+    override fun blindSuccess(loginResponse: LoginResponse) {
+        Toast.makeText(this,"绑定成功",Toast.LENGTH_SHORT).show()
+        PopUpUtil.cancelProgressBar(window,progressBar)
+        applyButton.visibility = View.INVISIBLE
+        take_photo.visibility = View.INVISIBLE
+    }
+
+    override fun blindFailed(errorMessage: String?) {
+        Toast.makeText(this,"绑定失败",Toast.LENGTH_SHORT).show()
+        PopUpUtil.cancelProgressBar(window,progressBar)
+    }
+
+    override fun getSelfCarCode(accessToken: String) {
+        PopUpUtil.showProgressBar(window,progressBar)
+        blindPresenterImpl.getSelfCarCode(accessToken)
+    }
+
+    override fun getSelfCarCodeSuccess(selfCarCodeResponse: SelfCarCodeResponse) {
+        val ids = selfCarCodeResponse.data?.otherPicIds
+        val paths = selfCarCodeResponse.data?.otherPicNames
+        if (ids?.size!! > 0 && paths?.size!! > 0)
+        {
+            fileBean.oldId = ids[0]
+            fileBean.filePath = paths[0]
+            car_code_text.text = selfCarCodeResponse.data?.photoId.toString()
+            val options = RequestOptions()
+            options.error(R.drawable.test_bg)
+            Glide.with(this).load(fileBean.filePath).apply(options).into(carPhoto)
+            applyButton.visibility = View.INVISIBLE
+            take_photo.visibility = View.INVISIBLE
+        }
+        PopUpUtil.cancelProgressBar(window,progressBar)
+    }
+
+    override fun getSelfCarCodeFailed(errorMessage: String?) {
+        PopUpUtil.cancelProgressBar(window,progressBar)
+//        finish()
     }
 }
