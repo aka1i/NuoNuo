@@ -1,5 +1,8 @@
 package com.example.nuonuo.model
 
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.android.api.options.RegisterOptionalUserInfo
+import cn.jpush.im.api.BasicCallback
 import com.example.nuonuo.bean.RegisterResponse
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.RegisterPresenter
@@ -30,8 +33,15 @@ class RegisterModelImpl: RegisterModel{
             val result = registerResponseAsyn?.await()
             if (result == null){
                 onRegisterListener.registerFailed(Constant.RESULT_NULL)
-            }else
+            }else{
                 onRegisterListener.registerSuccess(result)
+                val optionalUserInfo = RegisterOptionalUserInfo()
+                optionalUserInfo.nickname = "匿名用户"
+                JMessageClient.register(username, password, object : BasicCallback(){
+                    override fun gotResult(p0: Int, p1: String?) {
+                    }
+                })
+            }
 
 //            val result = null
         }catch (e: Exception){

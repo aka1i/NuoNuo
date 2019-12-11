@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import cn.jpush.im.android.api.JMessageClient
 import com.bumptech.glide.Glide
 import com.example.mykotlin.base.Preference
 
@@ -28,6 +29,7 @@ class MineFragment : Fragment(), View.OnClickListener {
 
     private var headPicUrl: String by Preference(Constant.HEAD_PIC_URL_KEY,"")
 
+    private var phone: String by Preference(Constant.PHONE_KEY,"")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,12 +58,13 @@ class MineFragment : Fragment(), View.OnClickListener {
         when(v?.id){
             R.id.mine_out_rl ->{
                 Preference.clear()
+                JMessageClient.logout()
                 startActivity(Intent(activity,FirstActivity::class.java))
                 activity?.finish()
             }
             R.id.head_img ->{
                 activity?.run {
-                    startActivity(CarOwnerActivity.newIntent(this,uid,headPicUrl,name))
+                    startActivity(CarOwnerActivity.newIntent(this,uid,headPicUrl,name,phone))
                 }
             }
             R.id.modify_info_rl -> {

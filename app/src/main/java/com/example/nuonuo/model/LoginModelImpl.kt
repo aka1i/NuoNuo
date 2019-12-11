@@ -1,5 +1,8 @@
 package com.example.nuonuo.model
 
+import android.util.Log
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.LoginPresenter
@@ -23,6 +26,14 @@ class LoginModelImpl: LoginModel{
                 val jsonObject = JSONObject()
                 jsonObject.put("account",username)
                 jsonObject.put("password",password)
+                JMessageClient.login(username, password, object : BasicCallback(){
+                    override fun gotResult(p0: Int, p1: String?) {
+                        if (p0 == 0)
+                            onLoginListener.loginFailed("IM成功")
+                        else
+                            onLoginListener.loginFailed(p1)
+                    }
+                })
                 loginResponseAsyn = RetrofitHelper.retrofitService.login(RetrofitHelper.getRequestBodyByJson(jsonObject))
                 val result = loginResponseAsyn?.await()
                 if (result == null){

@@ -1,5 +1,9 @@
 package com.example.nuonuo.model
 
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.android.api.callback.GetUserInfoCallback
+import cn.jpush.im.api.BasicCallback
+import com.example.mykotlin.base.Preference
 import com.example.nuonuo.bean.FileBean
 import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.bean.UploadFileResponse
@@ -25,6 +29,9 @@ class MineModelImpl: MineModel {
     private var headResponse: UploadFileResponse? = null
 
     private  var modifyResponseAsyn: Deferred<LoginResponse>? = null
+
+    private var phone: String by Preference(Constant.PHONE_KEY,"")
+
     override fun modifyUserInfo(modifyListener: MinePresenter.OnModifyListener,userInfo: UserInfo,accessToken: String,headFile: FileBean) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
@@ -48,6 +55,23 @@ class MineModelImpl: MineModel {
                 }else{
                     headFile.res = headResponse?.data?.url
                     headFile.newId = headResponse?.data?.id
+                    JMessageClient.getUserInfo(phone, Constant.PHONE_KEY, object : GetUserInfoCallback(){
+                        override fun gotResult(
+                            p0: Int,
+                            p1: String?,
+                            p2: cn.jpush.im.android.api.model.UserInfo?
+                        ) {
+                            p2?.nickname = userInfo.name
+                            JMessageClient.updateMyInfo(cn.jpush.im.android.api.model.UserInfo.Field.nickname
+                                ,p2,object : BasicCallback(){
+                                override fun gotResult(p0: Int, p1: String?) {
+
+                                }
+                            })
+                        }
+                    })
+
+
                     modifyListener.modifySuccess(result)
                 }
 

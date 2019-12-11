@@ -1,5 +1,11 @@
 package com.example.nuonuo.model
 
+import android.util.Log
+import android.widget.Toast
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.android.api.model.Conversation
+import cn.jpush.im.api.BasicCallback
+import com.example.mykotlin.base.Preference
 import com.example.nuonuo.bean.MessageLab
 import com.example.nuonuo.bean.MessageListResponse
 import com.example.nuonuo.bean.SendMessageResponse
@@ -75,7 +81,7 @@ class MessageModelImpl: MessageModel {
         }
     }
 
-    override fun sendMessage(onSendMessageListener: MessagePresenter.OnSendMessageListener,content: String, accessToken: String, uid: Int) {
+    override fun sendMessage(onSendMessageListener: MessagePresenter.OnSendMessageListener,content: String, accessToken: String, uid: Int,phone: String) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val jsonObject = JSONObject()
@@ -89,8 +95,16 @@ class MessageModelImpl: MessageModel {
                     onSendMessageListener.senMessageeFailed(Constant.RESULT_NULL)
                 }else
                 {
+                    Log.d("jiguang_123",phone)
+                    val message = JMessageClient.createSingleTextMessage(phone, Constant.IM_APP_KEY,content)
 
+                    message?.setOnSendCompleteCallback(object : BasicCallback(){
+                        override fun gotResult(p0: Int, p1: String?) {
+                        }
+                    })
+                    JMessageClient.sendMessage(message)
                     onSendMessageListener.senMessageSuccess()
+
                 }
 
 

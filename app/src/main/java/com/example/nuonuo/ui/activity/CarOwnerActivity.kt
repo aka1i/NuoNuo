@@ -27,16 +27,19 @@ import kotlin.properties.Delegates
 class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOwnerView {
 
     companion object{
-        fun newIntent(context: Context, uid: Int, name: String,headUrl: String): Intent{
+        fun newIntent(context: Context, uid: Int, name: String,headUrl: String, phone:String): Intent{
             val intent = Intent(context,CarOwnerActivity::class.java)
             intent.putExtra("uid",uid)
             intent.putExtra("headUrl", headUrl)
             intent.putExtra("name",name)
+            intent.putExtra("phone",phone)
             return intent
         }
     }
 
     private var uid by Delegates.notNull<Int>()
+
+    private lateinit var phone: String
 
     private var accessToken: String by Preference(Constant.ACCESS_TOKEN_KEY,"")
 
@@ -64,6 +67,7 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
             .apply(RequestOptions.bitmapTransform(BlurTransformation(10)))
             .into(car_owner_bg)
         uid = intent.getIntExtra("uid",0)
+        phone = intent.getStringExtra("phone")
         message_rl.setOnClickListener(this)
         car_owner_name.text = intent.getStringExtra("name")
     }
@@ -100,17 +104,15 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
             applyButton = popView.findViewById<ImageView>(R.id.applyButton)
             applyButton?.setOnClickListener {
                 it.isClickable = false
-                carOwnerPresenterImpl.senMessage(popView.findViewById<EditText>(R.id.message_et).text.toString(),accessToken,uid)
+                carOwnerPresenterImpl.senMessage(popView.findViewById<EditText>(R.id.message_et).text.toString(),accessToken,uid,phone)
                 PopUpUtil.showProgressBar(window,popView.findViewById(R.id.progressBar))
 
             }
         }
-
-
     }
 
-    override fun senMessage(content: String, accessToken: String, uid: Int) {
-        carOwnerPresenterImpl.senMessage(content,accessToken,uid)
+    override fun senMessage(content: String, accessToken: String, uid: Int,phone: String) {
+        carOwnerPresenterImpl.senMessage(content,accessToken,uid,phone)
     }
 
     override fun senMessageeFailed(errorMessage: String?) {
@@ -122,7 +124,4 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
         Toast.makeText(this,"留言成功", Toast.LENGTH_SHORT).show()
         popWindow?.dismiss()
     }
-
-
-
 }

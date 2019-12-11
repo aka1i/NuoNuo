@@ -1,5 +1,6 @@
 package com.example.nuonuo.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -67,6 +68,7 @@ class LoginActivity : BaseWithImmersionActivity(),LoginView, View.OnClickListene
         headPicUrl = result.data.headPicUrl
 
         startActivity(Intent(this,MainActivity::class.java))
+        setResult(Activity.RESULT_OK)
         finish()
     }
 

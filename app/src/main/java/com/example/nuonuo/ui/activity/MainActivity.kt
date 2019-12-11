@@ -3,9 +3,11 @@ package com.example.nuonuo.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import cn.jpush.im.android.api.JMessageClient
 import com.example.mykotlin.base.BaseWithImmersionActivity
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MainActivityPagerAdapter
+import com.example.nuonuo.im.GlobalEventListener
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.ui.fragment.HomeFragment
 import com.example.nuonuo.ui.fragment.MessageFragment
@@ -27,6 +29,11 @@ class MainActivity : BaseWithImmersionActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         init()
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
     fun init(){

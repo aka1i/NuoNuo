@@ -17,7 +17,7 @@ interface MessagePresenter {
     }
 
     interface OnSendMessageListener{
-        fun senMessage(content:String,accessToken:String,uid: Int)
+        fun senMessage(content:String,accessToken:String,uid: Int,phone: String)
 
         fun senMessageeFailed(errorMessage: String?)
 

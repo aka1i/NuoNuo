@@ -11,8 +11,8 @@ class CarOwnerPresenterImpl(private val carOwnerView: CarOwnerView): MessagePres
 
     private val messageModelImpl: MessageModelImpl = MessageModelImpl()
 
-    override fun senMessage(content: String, accessToken: String, uid: Int) {
-        messageModelImpl.sendMessage(this,content,accessToken,uid)
+    override fun senMessage(content: String, accessToken: String, uid: Int,phone: String) {
+        messageModelImpl.sendMessage(this,content,accessToken,uid,phone)
     }
 
     override fun senMessageeFailed(errorMessage: String?) {

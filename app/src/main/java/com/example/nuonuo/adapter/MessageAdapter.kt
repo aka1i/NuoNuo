@@ -32,8 +32,10 @@ class MessageAdapter(var beans: List<MessageListResponse.MessageItemBean>, var c
             val contextText = bottomView.findViewById<TextView>(R.id.content_text)
             val timetText = bottomView.findViewById<TextView>(R.id.time_text)
 
-
-            nameText.text = messageItemBean.sendName
+            if (type == 0)
+                nameText.text = messageItemBean.getName
+            else
+                nameText.text = messageItemBean.sendName
             contextText.text = messageItemBean.content + "(点击进入主页)"
             timetText.text = messageItemBean.stateTime
 
@@ -61,12 +63,13 @@ class MessageAdapter(var beans: List<MessageListResponse.MessageItemBean>, var c
             val clickListener = View.OnClickListener { view ->
                 when(context){
                     is Activity -> {
+                        //todo 手机号2处
                         if (type == 0)
-                        context.startActivity(CarOwnerActivity.newIntent(context,messageItemBean.sendId!!,
-                            messageItemBean.getName,messageItemBean.headPicUrl))
+                        context.startActivity(CarOwnerActivity.newIntent(context,messageItemBean.getId!!,
+                            messageItemBean.getName,messageItemBean.headPicUrl,"18965688000"))
                         else
                             context.startActivity(CarOwnerActivity.newIntent(context,messageItemBean.sendId!!,
-                                messageItemBean.sendName,messageItemBean.headPicUrl))
+                                messageItemBean.sendName,messageItemBean.headPicUrl,"18965688000"))
                     }
                 }
                 PopUpUtil.closePopupWindow(pop)

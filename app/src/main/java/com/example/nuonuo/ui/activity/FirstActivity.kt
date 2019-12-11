@@ -1,5 +1,6 @@
 package com.example.nuonuo.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -53,6 +54,13 @@ class FirstActivity : BaseWithImmersionActivity(), View.OnClickListener{
             START_REGISTER -> {
                 when (resultCode) {
                     RESULT_OK -> {
+                        finish()
+                    }
+                }
+            }
+            START_LOGIN ->{
+                when(requestCode){
+                    Activity.RESULT_OK ->{
                         finish()
                     }
                 }

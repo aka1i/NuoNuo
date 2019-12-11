@@ -20,7 +20,8 @@ class TrendAdapter(var beans: List<TrendListResponse.Data>, var context: Context
 
     var onItemClickListener: OnItemClickListener = object : OnItemClickListener{
         override fun onclick(position: Int) {
-            context.startActivity(CarOwnerActivity.newIntent(context,beans[position].uid!!,beans[position].name ?: "",beans[position].headPicUrl ?: ""))
+            //todo 手机号
+            context.startActivity(CarOwnerActivity.newIntent(context,beans[position].uid!!,beans[position].name ?: "",beans[position].headPicUrl ?: "","18965688000"))
         }
 
 

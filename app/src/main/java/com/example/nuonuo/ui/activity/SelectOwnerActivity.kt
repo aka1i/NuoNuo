@@ -67,7 +67,13 @@ class SelectOwnerActivity :BaseActivity(), View.OnClickListener, SelectCarOwnerV
 //            imgUrls.add(uri.toString())
 //        }
         adapter = EasyImgAdapter(this, imgUrls)
-        adapter.setOnItemClickedListener { position -> startActivity(CarOwnerActivity.newIntent(this@SelectOwnerActivity,datas[position].uid,datas[position].name,datas[position].headPicUrl ?: "")) }
+        adapter.setOnItemClickedListener { position ->
+            startActivity(CarOwnerActivity.newIntent(
+                this@SelectOwnerActivity,
+                datas[position].uid,
+                datas[position].name,
+                datas[position].headPicUrl ?: "",
+                datas[position].phone)) }
         val layoutManager = ScaleLayoutManager.Builder(this, 5)
             .setMaxVisibleItemCount(5)
             .setMoveSpeed(0.5.toFloat())
