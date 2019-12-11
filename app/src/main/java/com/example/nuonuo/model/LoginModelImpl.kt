@@ -28,10 +28,6 @@ class LoginModelImpl: LoginModel{
                 jsonObject.put("password",password)
                 JMessageClient.login(username, password, object : BasicCallback(){
                     override fun gotResult(p0: Int, p1: String?) {
-                        if (p0 == 0)
-                            onLoginListener.loginFailed("IM成功")
-                        else
-                            onLoginListener.loginFailed(p1)
                     }
                 })
                 loginResponseAsyn = RetrofitHelper.retrofitService.login(RetrofitHelper.getRequestBodyByJson(jsonObject))

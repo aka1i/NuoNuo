@@ -76,6 +76,7 @@ class MineFragment : Fragment(), View.OnClickListener {
     fun refreshSelfData(){
         val options = HeadImgUtil.getHeadImgOptions(sexual)
         Glide.with(this).load(headPicUrl).apply(options).into(head_img)
+        userNameText.text = name
     }
 
 }
