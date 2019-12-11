@@ -64,7 +64,7 @@ class MineFragment : Fragment(), View.OnClickListener {
             }
             R.id.head_img ->{
                 activity?.run {
-                    startActivity(CarOwnerActivity.newIntent(this,uid,headPicUrl,name,phone))
+                    startActivity(CarOwnerActivity.newIntent(this,uid,name,headPicUrl,phone))
                 }
             }
             R.id.modify_info_rl -> {

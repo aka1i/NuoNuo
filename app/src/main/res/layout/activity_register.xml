@@ -54,10 +54,13 @@
                android:layout_marginTop="5dp"
                android:layout_marginBottom="5dp"
                android:layout_centerVertical="true"
-               android:hint="用户名"
+               android:hint="手机号"
                android:textColor="@color/white"
                android:textColorHint="@color/white"
                android:maxLines="1"
+               android:lines="1"
+               android:maxLength="11"
+               android:inputType="number"
                android:background="@null"
                android:textCursorDrawable="@drawable/cursor_grey"/>
            <ImageView

@@ -131,10 +131,13 @@
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.SelectOwnerActivity" />
         <activity android:name=".ui.activity.GetCarCodeActivity" />
-        <activity android:name=".ui.activity.ForgotPasswordActivity" />
+        <activity android:name=".ui.activity.ForgotPasswordActivity"
+            android:theme="@style/inputKeyOverLay"/>
         <activity android:name=".ui.activity.CarOwnerActivity" />
-        <activity android:name=".ui.activity.RegisterWithImmersActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.RegisterWithImmersActivity"
+            android:theme="@style/inputKeyOverLay"/>
+        <activity android:name=".ui.activity.LoginActivity"
+            android:theme="@style/inputKeyOverLay"/>
         <activity
             android:name=".ui.activity.FirstActivity"
             android:theme="@style/AppTheme.Launcher">

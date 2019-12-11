@@ -14,6 +14,12 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <style name="inputKeyOverLay" parent="AppTheme">
+        <item name="android:exported">false</item>
+        <item name="android:launchMode">singleInstance</item>
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+    </style>
 
     <style name="main_menu_photo_anim">
         <item name="android:windowEnterAnimation">@anim/photo_dialog_in_anim</item>
