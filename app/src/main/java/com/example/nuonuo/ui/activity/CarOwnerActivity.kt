@@ -88,7 +88,6 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
         uid = intent.getIntExtra("uid",0)
         phone = intent.getStringExtra("phone")
         car_owner_name.text = intent.getStringExtra("name")
-
         message_rl.setOnClickListener(this)
         car_owner_phone_cv.setOnClickListener(this)
         phone_call_apply.setOnClickListener(this)
@@ -164,18 +163,14 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
 
     override fun callPhone(code:String) {
         phoneCallBean.code = code
-        Log.d("callPhone",accessToken)
-        Log.d("callPhone",phoneCallBean.toString())
         carOwnerPresenterImpl.phoneCall(phoneCallBean,accessToken)
     }
 
     override fun callPhoneSuccess(getPhoneCallResponse: GetPhoneCallResponse) {
-        Log.d("getPhoneCallResponse",getPhoneCallResponse.toString())
-        Log.d("getPhoneCallResponse",getPhoneCallResponse.data)
         val jsonObject = JSONObject(getPhoneCallResponse.data)
         val phone = jsonObject.getJSONObject("info").getString("dstVirtualNum")
         val intent = Intent(Intent.ACTION_DIAL);
-        val data = Uri.parse("tel:" + phone);
+        val data = Uri.parse("tel:" + phone)
         intent.data = data;
         startActivity(intent);
     }
@@ -191,8 +186,6 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
     }
 
     override fun getCookieAndTokenSuccess(phoneCodeResponse: PhoneCodeResponse) {
-        Log.d("phoneCodeResponse",phoneCodeResponse.toString())
-        Toast.makeText(this,phoneCodeResponse.toString(), Toast.LENGTH_SHORT).show()
         Toast.makeText(this,"请输入验证码",Toast.LENGTH_SHORT).show()
         phone_code_cv.visibility = View.VISIBLE
         PopUpUtil.cancelProgressBar(window,progressBar)

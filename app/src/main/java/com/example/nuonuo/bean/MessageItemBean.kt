@@ -15,6 +15,8 @@ data class MessageListResponse(
         var getName:String,
         var stateTime: String,
         var headPicUrl: String,
-        var headPicId: Int?
+        var headPicId: Int?,
+        var sendPhone: String?,
+        var getPhone: String?
     )
 }

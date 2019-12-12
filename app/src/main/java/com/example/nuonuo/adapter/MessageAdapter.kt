@@ -66,10 +66,10 @@ class MessageAdapter(var beans: List<MessageListResponse.MessageItemBean>, var c
                         //todo 手机号2处
                         if (type == 0)
                         context.startActivity(CarOwnerActivity.newIntent(context,messageItemBean.getId!!,
-                            messageItemBean.getName,messageItemBean.headPicUrl,"18965688000"))
+                            messageItemBean.getName,messageItemBean.headPicUrl,messageItemBean.getPhone ?:""))
                         else
                             context.startActivity(CarOwnerActivity.newIntent(context,messageItemBean.sendId!!,
-                                messageItemBean.sendName,messageItemBean.headPicUrl,"18965688000"))
+                                messageItemBean.sendName,messageItemBean.headPicUrl,messageItemBean.sendPhone?:""))
                     }
                 }
                 PopUpUtil.closePopupWindow(pop)

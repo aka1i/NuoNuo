@@ -19,7 +19,8 @@ data class TrendListResponse(
         var otherPicIds:List<Int>?,
         var stateTime:String?,
         var headPicId:String?,
-        var headPicUrl:String?
+        var headPicUrl:String?,
+        var phone:String?
     ){
         data class leave(
             var id: Int?,
