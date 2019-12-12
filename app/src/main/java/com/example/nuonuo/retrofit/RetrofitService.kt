@@ -2,6 +2,8 @@ import com.example.nuonuo.bean.*
 import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.Response
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 /**
@@ -104,4 +106,14 @@ interface RetrofitService {
     fun getOwnerList(
         @Path("photoId")id:String
     ): Deferred<GetCarOnwerResponse>
+
+    //获取匿名电话验证码cookie和token
+    @GET("v1/message/pic")
+    fun getPhoneCode(): Deferred<PhoneCodeResponse>
+
+    @POST("v1/message/phone")
+    fun phoneCall(
+        @Body requestBody: PhoneCallBean,
+        @Header("Authorization") access_token: String
+    ): Deferred<GetPhoneCallResponse>
 }

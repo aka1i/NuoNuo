@@ -1,5 +1,10 @@
 package com.example.nuonuo.presenter
 
+import android.graphics.Bitmap
+import com.example.nuonuo.bean.GetPhoneCallResponse
+import com.example.nuonuo.bean.PhoneCallBean
+import com.example.nuonuo.bean.PhoneCodeResponse
+
 interface MessagePresenter {
     interface OnMessagePresenterListener{
         fun getSend(accessToken:String,uid: Int)
@@ -23,4 +28,21 @@ interface MessagePresenter {
 
         fun  senMessageSuccess()
     }
+
+    interface OnGetPhoneCookieAndTokenListener{
+        fun getPhoneCookieAndToken()
+
+        fun getPhoneCookieAndTokenSuccess(phoneCodeResponse:PhoneCodeResponse)
+
+        fun getPhoneCookieAndTokenFailed(errorMessage: String?)
+    }
+
+    interface OnPhoneCallListener{
+        fun phoneCall(phoneCallBean: PhoneCallBean,accessToken: String)
+
+        fun phoneCallSuccess(phoneCallResponse: GetPhoneCallResponse)
+
+        fun phoneCallFailed(errorMessage: String?)
+    }
+
 }

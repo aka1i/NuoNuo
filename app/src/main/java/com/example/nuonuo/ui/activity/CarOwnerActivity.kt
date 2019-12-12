@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +14,13 @@ import android.view.WindowManager
 import android.widget.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.example.mykotlin.base.BaseWithImmersionActivity
 import com.example.mykotlin.base.Preference
 import com.example.nuonuo.R
+import com.example.nuonuo.bean.GetPhoneCallResponse
+import com.example.nuonuo.bean.PhoneCallBean
+import com.example.nuonuo.bean.PhoneCodeResponse
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.CarOwnerPresenterImpl
 import com.example.nuonuo.utils.HeadImgUtil
@@ -22,6 +28,8 @@ import com.example.nuonuo.utils.PopUpUtil
 import com.example.nuonuo.view.CarOwnerView
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_car_owner.*
+import org.json.JSONObject
+import java.util.*
 import kotlin.properties.Delegates
 
 class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOwnerView {
@@ -41,6 +49,9 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
 
     private lateinit var phone: String
 
+    private var myPhone: String by Preference(Constant.PHONE_KEY,"")
+
+
     private var accessToken: String by Preference(Constant.ACCESS_TOKEN_KEY,"")
 
     private val carOwnerPresenterImpl: CarOwnerPresenterImpl by lazy {
@@ -50,6 +61,14 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
     private var popWindow: PopupWindow? = null
 
     private var applyButton: ImageView? = null
+
+    private var phoneCallBean = PhoneCallBean(
+        null,
+        null,
+        null,
+        null
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_car_owner)
@@ -68,14 +87,32 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
             .into(car_owner_bg)
         uid = intent.getIntExtra("uid",0)
         phone = intent.getStringExtra("phone")
-        message_rl.setOnClickListener(this)
         car_owner_name.text = intent.getStringExtra("name")
+
+        message_rl.setOnClickListener(this)
+        car_owner_phone_cv.setOnClickListener(this)
+        phone_call_apply.setOnClickListener(this)
+        phoneCallBean.callId = uid.toString()
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.message_rl ->{
                 showMessagePop()
+            }
+            R.id.car_owner_phone_cv ->{
+//                if (myPhone == phone)
+//                {
+//                    Toast.makeText(this,"不能给自己打电话哦",Toast.LENGTH_SHORT).show()
+//                    return
+//                }
+                getCookieAndToken()
+            }
+            R.id.phone_call_apply ->{
+                if (phone_code_et.text.length < 4)
+                    Toast.makeText(this,"验证码长度过短",Toast.LENGTH_SHORT).show()
+                else
+                    callPhone(phone_code_et.text.toString())
             }
         }
     }
@@ -124,4 +161,53 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
         Toast.makeText(this,"留言成功", Toast.LENGTH_SHORT).show()
         popWindow?.dismiss()
     }
+
+    override fun callPhone(code:String) {
+        phoneCallBean.code = code
+        Log.d("callPhone",accessToken)
+        Log.d("callPhone",phoneCallBean.toString())
+        carOwnerPresenterImpl.phoneCall(phoneCallBean,accessToken)
+    }
+
+    override fun callPhoneSuccess(getPhoneCallResponse: GetPhoneCallResponse) {
+        Log.d("getPhoneCallResponse",getPhoneCallResponse.toString())
+        Log.d("getPhoneCallResponse",getPhoneCallResponse.data)
+        val jsonObject = JSONObject(getPhoneCallResponse.data)
+        val phone = jsonObject.getJSONObject("info").getString("dstVirtualNum")
+        val intent = Intent(Intent.ACTION_DIAL);
+        val data = Uri.parse("tel:" + phone);
+        intent.data = data;
+        startActivity(intent);
+    }
+
+    override fun callPhoneFailed(errorMessage: String?) {
+        Toast.makeText(this,errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun getCookieAndToken() {
+        carOwnerPresenterImpl.getPhoneCookieAndToken()
+        phone_code_cv.visibility = View.INVISIBLE
+        PopUpUtil.showProgressBar(window,progressBar)
+    }
+
+    override fun getCookieAndTokenSuccess(phoneCodeResponse: PhoneCodeResponse) {
+        Log.d("phoneCodeResponse",phoneCodeResponse.toString())
+        Toast.makeText(this,phoneCodeResponse.toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"请输入验证码",Toast.LENGTH_SHORT).show()
+        phone_code_cv.visibility = View.VISIBLE
+        PopUpUtil.cancelProgressBar(window,progressBar)
+        phoneCallBean.cookie = phoneCodeResponse.cookie
+        phoneCallBean.formToken = phoneCodeResponse.formToken
+        Glide.with(this).load("http://xyt.fzu.edu.cn:54321/v1/message/read")
+            .signature(ObjectKey(Date().time))
+            .apply(HeadImgUtil.getHeadImgOptions(""))
+            .into(phone_code)
+    }
+
+    override fun getCookieAndTokenFailed(errorMessage: String?) {
+        Toast.makeText(this,errorMessage, Toast.LENGTH_SHORT).show()
+        phone_code_cv.visibility = View.INVISIBLE
+        PopUpUtil.cancelProgressBar(window,progressBar)
+    }
+
 }

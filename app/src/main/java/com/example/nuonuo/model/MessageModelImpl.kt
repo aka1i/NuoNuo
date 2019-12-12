@@ -1,14 +1,8 @@
 package com.example.nuonuo.model
 
-import android.util.Log
-import android.widget.Toast
 import cn.jpush.im.android.api.JMessageClient
-import cn.jpush.im.android.api.model.Conversation
 import cn.jpush.im.api.BasicCallback
-import com.example.mykotlin.base.Preference
-import com.example.nuonuo.bean.MessageLab
-import com.example.nuonuo.bean.MessageListResponse
-import com.example.nuonuo.bean.SendMessageResponse
+import com.example.nuonuo.bean.*
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.MessagePresenter
 import kotlinx.coroutines.Deferred
@@ -22,6 +16,8 @@ class MessageModelImpl: MessageModel {
     private  var sendMessageListResponseAsyn: Deferred<MessageListResponse>? = null
     private  var receiveMessageListResponseAsyn: Deferred<MessageListResponse>? = null
     private var SendMessageResponseAsyn: Deferred<SendMessageResponse>? = null
+    private var getPhonePicResponseAsyn: Deferred<PhoneCodeResponse>? = null
+    private var phoneCallResponseAsyn: Deferred<GetPhoneCallResponse>? = null
     override fun getSend(onMessagePresenterListener: MessagePresenter.OnMessagePresenterListener,accessToken:String,uid:Int) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
@@ -95,7 +91,6 @@ class MessageModelImpl: MessageModel {
                     onSendMessageListener.senMessageeFailed(Constant.RESULT_NULL)
                 }else
                 {
-                    Log.d("jiguang_123",phone)
                     val message = JMessageClient.createSingleTextMessage(phone, Constant.IM_APP_KEY,content)
 
                     message?.setOnSendCompleteCallback(object : BasicCallback(){
@@ -106,14 +101,60 @@ class MessageModelImpl: MessageModel {
                     onSendMessageListener.senMessageSuccess()
 
                 }
-
-
             }catch (e: Exception){
                 e.printStackTrace()
                 if(e is HttpException){
                     onSendMessageListener.senMessageeFailed(e.response().errorBody()?.string())
                 }else{
                     onSendMessageListener.senMessageeFailed(e.message)
+                }
+            }
+        }
+    }
+
+    override fun getPhoneCookieAndToken(onGetPhoneCookieAndTokenListener: MessagePresenter.OnGetPhoneCookieAndTokenListener) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                getPhonePicResponseAsyn = RetrofitHelper.retrofitService.getPhoneCode()
+                val result = getPhonePicResponseAsyn?.await()
+                if (result == null){
+                    onGetPhoneCookieAndTokenListener.getPhoneCookieAndTokenFailed(Constant.RESULT_NULL)
+                }else
+                {
+                    onGetPhoneCookieAndTokenListener.getPhoneCookieAndTokenSuccess(result)
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
+                if(e is HttpException){
+                    onGetPhoneCookieAndTokenListener.getPhoneCookieAndTokenFailed(e.response().errorBody()?.string())
+                }else{
+                    onGetPhoneCookieAndTokenListener.getPhoneCookieAndTokenFailed(e.message)
+                }
+            }
+        }
+    }
+
+    override fun phoneCall(
+        onPhoneCallListener: MessagePresenter.OnPhoneCallListener,
+        phoneCallBean: PhoneCallBean,
+        accessToken: String
+    ) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                phoneCallResponseAsyn = RetrofitHelper.retrofitService.phoneCall(phoneCallBean,accessToken)
+                val result = phoneCallResponseAsyn?.await()
+                if (result == null){
+                    onPhoneCallListener.phoneCallFailed(Constant.RESULT_NULL)
+                }else
+                {
+                    onPhoneCallListener.phoneCallSuccess(result)
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
+                if(e is HttpException){
+                    onPhoneCallListener.phoneCallFailed(e.response().errorBody()?.string())
+                }else{
+                    onPhoneCallListener.phoneCallFailed(e.message)
                 }
             }
         }
