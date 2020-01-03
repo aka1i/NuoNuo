@@ -114,19 +114,37 @@
             android:layout_centerVertical="true"/>
     </RelativeLayout>
 
-    <Button
+<!--    <Button-->
+<!--        android:id="@+id/login_btn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="登入"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:textSize="16sp"-->
+<!--        android:layout_below="@id/register_password_rl"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:layout_marginLeft="80dp"-->
+<!--        android:layout_marginRight="80dp"-->
+<!--        android:background="@drawable/register_button_bg2"/>-->
+
+
+    <com.example.nuonuo.ui.custom.SmartLoadingView
         android:id="@+id/login_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="登入"
+        android:layout_height="50dp"
         android:textColor="@color/white"
-        android:textSize="16sp"
         android:layout_below="@id/register_password_rl"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:background="@drawable/register_button_bg2"/>
+        app:textSize="16sp"
+        app:textStr="登入"
+        app:normalBg="@color/yellow"
+        app:errorBg="@color/red1"
+        app:errorStr="重试"
+        app:cornerRaius="100dp"/>
 
     <TextView
         android:id="@+id/forgotPasswordTextView"

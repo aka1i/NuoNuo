@@ -39,10 +39,10 @@ class FirstActivity : BaseWithImmersionActivity(), View.OnClickListener{
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.goToRegisterText ->{
-                startActivity(Intent(this,LoginActivity::class.java))
+                startActivityForResult(Intent(this,LoginActivity::class.java), START_LOGIN)
             }
             R.id.register_rl ->{
-                startActivity(Intent(this,RegisterWithImmersActivity::class.java))
+                startActivityForResult(Intent(this,RegisterWithImmersActivity::class.java),START_REGISTER)
             }
         }
     }
@@ -59,7 +59,7 @@ class FirstActivity : BaseWithImmersionActivity(), View.OnClickListener{
                 }
             }
             START_LOGIN ->{
-                when(requestCode){
+                when(resultCode){
                     Activity.RESULT_OK ->{
                         finish()
                     }

@@ -1,13 +1,13 @@
 package com.example.nuonuo.ui.activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.mykotlin.base.BaseWithImmersionActivity
 import com.example.nuonuo.R
 import com.example.nuonuo.bean.RegisterResponse
 import com.example.nuonuo.presenter.RegisterPresenterImpl
+import com.example.nuonuo.ui.custom.SmartLoadingView
 import com.example.nuonuo.view.RegisterView
 import kotlinx.android.synthetic.main.activity_register.*
 
@@ -28,6 +28,16 @@ class RegisterWithImmersActivity : BaseWithImmersionActivity(), RegisterView,Vie
 
     fun init(){
         registerButton.setOnClickListener(this)
+        registerButton.myListener = object :SmartLoadingView.MyListener{
+            override fun onSuccess() {
+                setResult(RESULT_OK)
+                finish()
+            }
+
+            override fun onFailed() {
+                Toast.makeText(this@RegisterWithImmersActivity,"请重试", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -51,8 +61,8 @@ class RegisterWithImmersActivity : BaseWithImmersionActivity(), RegisterView,Vie
                     Toast.makeText(this,"邮箱格式有误", Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    Log.d("RetrofitHelper","onclick")
                     registerPresenterImpl.register(userName,password,email)
+                    registerButton.start()
                 }
 
             }
@@ -60,14 +70,11 @@ class RegisterWithImmersActivity : BaseWithImmersionActivity(), RegisterView,Vie
     }
 
     override fun registerSuccess(result: RegisterResponse) {
-        Toast.makeText(this,result.message, Toast.LENGTH_SHORT).show()
-//        startActivity(Intent(this,MainActivity::class.java))
-//        setResult(RESULT_OK)
-        finish()
+        registerButton.success()
     }
 
     override fun registerFailed(errorMessage: String?) {
-        Toast.makeText(this,errorMessage, Toast.LENGTH_SHORT).show()
+       registerButton.failed()
     }
 
 }

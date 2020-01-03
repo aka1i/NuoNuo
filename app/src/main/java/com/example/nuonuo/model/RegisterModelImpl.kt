@@ -48,7 +48,8 @@ class RegisterModelImpl: RegisterModel{
                 e.printStackTrace()
                 if(e is HttpException){
                     onRegisterListener.registerFailed(e.response().errorBody()?.string())
-                }
+                }else
+                    onRegisterListener.registerFailed(e.message)
             }
         }
 

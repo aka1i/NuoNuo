@@ -11,6 +11,7 @@ import com.example.nuonuo.R
 import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.LoginPresenterImpl
+import com.example.nuonuo.ui.custom.SmartLoadingView
 import com.example.nuonuo.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -35,6 +36,9 @@ class LoginActivity : BaseWithImmersionActivity(),LoginView, View.OnClickListene
 
     private var headPicUrl: String? by Preference(Constant.HEAD_PIC_URL_KEY,"")
 
+    private var result:LoginResponse? = null
+
+    private var errorMessage:String? = null
 
     private val loginPresenterImpl: LoginPresenterImpl by lazy {
         LoginPresenterImpl(this)
@@ -49,27 +53,40 @@ class LoginActivity : BaseWithImmersionActivity(),LoginView, View.OnClickListene
     fun init(){
         login_btn.setOnClickListener(this)
         forgotPasswordTextView.setOnClickListener(this)
+        login_btn.myListener = object :SmartLoadingView.MyListener{
+            override fun onSuccess() {
+                result?.run{
+                    uid = this.data.uid
+                    accessToken = this.data.accessToken
+                    phone = this.data.phone
+                    name = this.data.name
+                    sexual = this.data.sexual
+                    qq = this.data.qq
+                    weixin = this.data.weixin
+                    headPicId = this.data.headPicId
+                    headPicUrl = this.data.headPicUrl
+
+                    startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                    setResult(Activity.RESULT_OK)
+                    finish()
+                }
+            }
+
+            override fun onFailed() {
+                Toast.makeText(this@LoginActivity,errorMessage,Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 
     override fun loginFailed(errorMessage: String?) {
-        Toast.makeText(this,errorMessage,Toast.LENGTH_SHORT).show()
+        this.errorMessage = errorMessage
+        login_btn.failed()
     }
 
     override fun loginSuccess(result: LoginResponse) {
-        uid = result.data.uid
-        accessToken = result.data.accessToken
-        phone = result.data.phone
-        name = result.data.name
-        sexual = result.data.sexual
-        qq = result.data.qq
-        weixin = result.data.weixin
-        headPicId = result.data.headPicId
-        headPicUrl = result.data.headPicUrl
-
-        startActivity(Intent(this,MainActivity::class.java))
-        setResult(Activity.RESULT_OK)
-        finish()
+        this.result = result
+        login_btn.success()
     }
 
     override fun onClick(v: View?) {
@@ -85,6 +102,7 @@ class LoginActivity : BaseWithImmersionActivity(),LoginView, View.OnClickListene
                         Toast.makeText(this,"密码不能为空", Toast.LENGTH_SHORT).show()
                     }
                     else ->{
+                        login_btn.start()
                         loginPresenterImpl.login(username,password)
                     }
                 }

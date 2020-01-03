@@ -97,14 +97,19 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.message_rl ->{
+                if (myPhone == phone)
+                {
+                    Toast.makeText(this,"不能给自己留言哦",Toast.LENGTH_SHORT).show()
+                    return
+                }
                 showMessagePop()
             }
             R.id.car_owner_phone_cv ->{
-//                if (myPhone == phone)
-//                {
-//                    Toast.makeText(this,"不能给自己打电话哦",Toast.LENGTH_SHORT).show()
-//                    return
-//                }
+                if (myPhone == phone)
+                {
+                    Toast.makeText(this,"不能给自己打电话哦",Toast.LENGTH_SHORT).show()
+                    return
+                }
                 getCookieAndToken()
             }
             R.id.phone_call_apply ->{

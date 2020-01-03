@@ -6,10 +6,7 @@ import cn.jpush.im.api.BasicCallback
 import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.LoginPresenter
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.json.JSONObject
 import retrofit2.HttpException
 
@@ -31,6 +28,7 @@ class LoginModelImpl: LoginModel{
                     }
                 })
                 loginResponseAsyn = RetrofitHelper.retrofitService.login(RetrofitHelper.getRequestBodyByJson(jsonObject))
+
                 val result = loginResponseAsyn?.await()
                 if (result == null){
                     onLoginListener.loginFailed(Constant.RESULT_NULL)
@@ -41,7 +39,8 @@ class LoginModelImpl: LoginModel{
                 e.printStackTrace()
                 if(e is HttpException){
                     onLoginListener.loginFailed(e.response().errorBody()?.string())
-                }
+                }else
+                    onLoginListener.loginFailed(e.message)
             }
         }
     }
