@@ -11,4 +11,13 @@
         <attr name="textSize" format="dimension" />
         <attr name="scrollSpeed" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="WaveView">
+        <attr name="A" format="integer" />
+        <attr name="omiga" format="float" />
+        <attr name="K" format="integer" />
+        <attr name="bg_color" format="color"/>
+        <attr name="fi" format="float"/>
+        <attr name="change_fi" format="float"/>
+    </declare-styleable>
 </resources>
