@@ -4,7 +4,6 @@ package com.example.nuonuo.ui.fragment
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,8 +27,6 @@ import com.example.nuonuo.utils.HeadImgUtil
 import com.example.nuonuo.view.TrendView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_mine.*
-import kotlinx.android.synthetic.main.fragment_treands.*
-import org.w3c.dom.Text
 
 /**
  * A simple [Fragment] subclass.
@@ -55,6 +52,8 @@ class TrendsFragment : Fragment(), TrendView, View.OnClickListener{
     private var sexual: String by Preference(Constant.SEXUAL_KEY,"")
 
     private var headPicUrl: String? by Preference(Constant.HEAD_PIC_URL_KEY,"")
+
+    private var score: Int? by Preference(Constant.SCORE_KEY,0)
 
 
     private val trendPresenterImpl:TrendPresenterImpl by lazy {
@@ -118,6 +117,10 @@ class TrendsFragment : Fragment(), TrendView, View.OnClickListener{
     override fun refresh() {
         trendAdapter?.beans = TrendLab.datas
         trendAdapter?.notifyDataSetChanged()
+    }
+
+    fun reFreshMyData(){
+        scoreText.text = "积分:$score"
     }
 
     override fun stopRefresh() {

@@ -3,19 +3,25 @@ package com.example.nuonuo.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import cn.jpush.im.android.api.JMessageClient
 import com.example.mykotlin.base.BaseWithImmersionActivity
+import com.example.mykotlin.base.Preference
 import com.example.nuonuo.R
 import com.example.nuonuo.adapter.MainActivityPagerAdapter
+import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.im.GlobalEventListener
 import com.example.nuonuo.marco.Constant
+import com.example.nuonuo.presenter.LoginPresenterImpl
+import com.example.nuonuo.presenter.MainViewPresenterImpl
 import com.example.nuonuo.ui.fragment.HomeFragment
 import com.example.nuonuo.ui.fragment.MessageFragment
 import com.example.nuonuo.ui.fragment.MineFragment
 import com.example.nuonuo.ui.fragment.TrendsFragment
+import com.example.nuonuo.view.MainView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseWithImmersionActivity() {
+class MainActivity : BaseWithImmersionActivity() ,MainView{
 
     private val homeFragment = HomeFragment()
 
@@ -24,6 +30,12 @@ class MainActivity : BaseWithImmersionActivity() {
     private val messageFragment = MessageFragment()
 
     private val mineFragment = MineFragment()
+
+    private val mainViewPresenterImpl = MainViewPresenterImpl(this)
+
+    private val accessToken by Preference(Constant.ACCESS_TOKEN_KEY,"")
+
+    private var score:Int by Preference(Constant.SCORE_KEY,0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +74,7 @@ class MainActivity : BaseWithImmersionActivity() {
             }
             true
         }
+        getMyInfo(accessToken)
     }
 
 
@@ -77,5 +90,19 @@ class MainActivity : BaseWithImmersionActivity() {
                 }
             }
         }
+    }
+
+
+    override fun getMyInfo(accessToken: String) {
+        mainViewPresenterImpl.getMyInfo(accessToken)
+    }
+
+    override fun getMyInfoSuccess(result: LoginResponse) {
+        score = result.data.score
+        trendsFragment.reFreshMyData()
+        mineFragment.refreshSelfData()
+    }
+
+    override fun getMyInfoFailed(errorMessage: String?) {
     }
 }

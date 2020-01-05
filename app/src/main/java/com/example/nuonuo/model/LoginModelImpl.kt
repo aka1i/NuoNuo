@@ -16,7 +16,7 @@ import retrofit2.HttpException
  */
 class LoginModelImpl: LoginModel{
     private  var loginResponseAsyn: Deferred<LoginResponse>? = null
-
+    private  var getMyInfoResponseAsyn: Deferred<LoginResponse>? = null
     override fun login(onLoginListener: LoginPresenter.OnLoginListener,username: String, password: String) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
@@ -41,6 +41,27 @@ class LoginModelImpl: LoginModel{
                     onLoginListener.loginFailed(e.response().errorBody()?.string())
                 }else
                     onLoginListener.loginFailed(e.message)
+            }
+        }
+    }
+
+    override fun getMyInfo(onGetMyInfoListener: LoginPresenter.OnGetMyInfoListener, accessToken: String) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                getMyInfoResponseAsyn = RetrofitHelper.retrofitService.getMyInfo(accessToken)
+
+                val result = getMyInfoResponseAsyn?.await()
+                if (result == null){
+                    onGetMyInfoListener.getMyInfoFailed(Constant.RESULT_NULL)
+                }else
+                    onGetMyInfoListener.getMyInfoSuccess(result)
+
+            }catch (e: Exception){
+                e.printStackTrace()
+                if(e is HttpException){
+                    onGetMyInfoListener.getMyInfoFailed(e.response().errorBody()?.string())
+                }else
+                    onGetMyInfoListener.getMyInfoFailed(e.message)
             }
         }
     }

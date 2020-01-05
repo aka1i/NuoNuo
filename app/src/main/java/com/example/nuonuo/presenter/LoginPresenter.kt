@@ -16,5 +16,13 @@ interface LoginPresenter {
         fun loginFailed(errorMessage: String?)
     }
 
+    interface OnGetMyInfoListener{
+        fun getMyInfo(accessToken:String)
+
+        fun getMyInfoSuccess(loginResponse: LoginResponse)
+
+
+        fun getMyInfoFailed(errorMessage: String?)
+    }
 
 }

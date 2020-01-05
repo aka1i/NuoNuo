@@ -8,4 +8,7 @@ import com.example.nuonuo.presenter.LoginPresenter
  */
 interface LoginModel {
     fun login(onLoginListener: LoginPresenter.OnLoginListener,username: String,password: String)
+
+    fun getMyInfo(onGetMyInfoListener: LoginPresenter.OnGetMyInfoListener,accessToken:String)
+
 }

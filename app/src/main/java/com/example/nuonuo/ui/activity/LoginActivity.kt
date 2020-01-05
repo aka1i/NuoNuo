@@ -14,6 +14,7 @@ import com.example.nuonuo.presenter.LoginPresenterImpl
 import com.example.nuonuo.ui.custom.SmartLoadingView
 import com.example.nuonuo.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.fragment_treands.*
 
 class LoginActivity : BaseWithImmersionActivity(),LoginView, View.OnClickListener {
 
@@ -35,6 +36,8 @@ class LoginActivity : BaseWithImmersionActivity(),LoginView, View.OnClickListene
     private var headPicId: Int? by Preference(Constant.HEAD_PIC_ID_KEY,0)
 
     private var headPicUrl: String? by Preference(Constant.HEAD_PIC_URL_KEY,"")
+
+    private var score: Int? by Preference(Constant.SCORE_KEY,0)
 
     private var result:LoginResponse? = null
 
@@ -65,6 +68,7 @@ class LoginActivity : BaseWithImmersionActivity(),LoginView, View.OnClickListene
                     weixin = this.data.weixin
                     headPicId = this.data.headPicId
                     headPicUrl = this.data.headPicUrl
+                    score = this.data.score
 
                     startActivity(Intent(this@LoginActivity,MainActivity::class.java))
                     setResult(Activity.RESULT_OK)

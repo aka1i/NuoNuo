@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +18,12 @@ import com.example.mykotlin.base.BaseWithImmersionActivity
 import com.example.mykotlin.base.Preference
 import com.example.nuonuo.R
 import com.example.nuonuo.bean.GetPhoneCallResponse
+import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.bean.PhoneCallBean
 import com.example.nuonuo.bean.PhoneCodeResponse
 import com.example.nuonuo.marco.Constant
 import com.example.nuonuo.presenter.CarOwnerPresenterImpl
+import com.example.nuonuo.ui.custom.WaveButton
 import com.example.nuonuo.utils.HeadImgUtil
 import com.example.nuonuo.utils.PopUpUtil
 import com.example.nuonuo.view.CarOwnerView
@@ -92,6 +93,16 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
         car_owner_phone_cv.setOnClickListener(this)
         phone_call_apply.setOnClickListener(this)
         phoneCallBean.callId = uid.toString()
+
+        if(myPhone == phone){
+            waveButton_rl.visibility = View.INVISIBLE
+        }
+
+        waveButton.mProgressListener = object :WaveButton.ProgressListener{
+            override fun onEnd() {
+                dianzan(uid,accessToken)
+            }
+        }
     }
 
     override fun onClick(v: View?) {
@@ -174,10 +185,10 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
     override fun callPhoneSuccess(getPhoneCallResponse: GetPhoneCallResponse) {
         val jsonObject = JSONObject(getPhoneCallResponse.data)
         val phone = jsonObject.getJSONObject("info").getString("dstVirtualNum")
-        val intent = Intent(Intent.ACTION_DIAL);
+        val intent = Intent(Intent.ACTION_DIAL)
         val data = Uri.parse("tel:" + phone)
-        intent.data = data;
-        startActivity(intent);
+        intent.data = data
+        startActivity(intent)
     }
 
     override fun callPhoneFailed(errorMessage: String?) {
@@ -208,4 +219,15 @@ class CarOwnerActivity : BaseWithImmersionActivity(), View.OnClickListener,CarOw
         PopUpUtil.cancelProgressBar(window,progressBar)
     }
 
+    override fun dianzan(id: Int, accessToken: String) {
+        carOwnerPresenterImpl.dianzan(id,accessToken)
+    }
+
+    override fun dianzanSuccess(loginResponse: LoginResponse) {
+        Toast.makeText(this,"点赞成功",Toast.LENGTH_SHORT).show()
+    }
+
+    override fun dianzanFailed(errorMessage: String?) {
+        Toast.makeText(this,"点赞失败",Toast.LENGTH_SHORT).show()
+    }
 }

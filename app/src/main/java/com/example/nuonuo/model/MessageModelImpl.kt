@@ -18,6 +18,7 @@ class MessageModelImpl: MessageModel {
     private var SendMessageResponseAsyn: Deferred<SendMessageResponse>? = null
     private var getPhonePicResponseAsyn: Deferred<PhoneCodeResponse>? = null
     private var phoneCallResponseAsyn: Deferred<GetPhoneCallResponse>? = null
+    private var dianzanResponseAsyn: Deferred<LoginResponse>? = null
     override fun getSend(onMessagePresenterListener: MessagePresenter.OnMessagePresenterListener,accessToken:String,uid:Int) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
@@ -155,6 +156,32 @@ class MessageModelImpl: MessageModel {
                     onPhoneCallListener.phoneCallFailed(e.response().errorBody()?.string())
                 }else{
                     onPhoneCallListener.phoneCallFailed(e.message)
+                }
+            }
+        }
+    }
+
+    override fun dianzan(
+        onDianzanListener: MessagePresenter.OnDianzanListener,
+        id: Int,
+        accessToken: String
+    ) {
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                dianzanResponseAsyn = RetrofitHelper.retrofitService.dianzan(id,accessToken)
+                val result = dianzanResponseAsyn?.await()
+                if (result == null){
+                    onDianzanListener.dianzanFailed(Constant.RESULT_NULL)
+                }else
+                {
+                    onDianzanListener.dianzanSuccess(result)
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
+                if(e is HttpException){
+                    onDianzanListener.dianzanFailed(e.response().errorBody()?.string())
+                }else{
+                    onDianzanListener.dianzanFailed(e.message)
                 }
             }
         }

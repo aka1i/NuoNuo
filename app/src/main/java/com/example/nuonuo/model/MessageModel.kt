@@ -13,4 +13,7 @@ interface MessageModel {
     fun getPhoneCookieAndToken(onGetPhoneCookieAndTokenListener: MessagePresenter.OnGetPhoneCookieAndTokenListener)
 
     fun phoneCall(onPhoneCallListener: MessagePresenter.OnPhoneCallListener,phoneCallBean: PhoneCallBean,accessToken: String)
+
+    fun dianzan(onDianzanListener: MessagePresenter.OnDianzanListener,id:Int,accessToken: String)
+
 }

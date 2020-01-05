@@ -16,6 +16,8 @@ object Constant {
     const val HEAD_PIC_URL_KEY = "head_pic_url"
     const val BAIDU_API_EXPIRES_IN= "baidu_apiexpires_in"
     const val BAIDU_API_ACCESS_TOKEN = "baidu_api_access_token"
+    const val SCORE_KEY = "score"
+
 
     const val IM_APP_KEY = "177d38b5f319a8feabd2dd21"
 

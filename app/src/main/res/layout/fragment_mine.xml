@@ -96,6 +96,7 @@
                             android:src="@drawable/mine_point_icon"
                             android:layout_gravity="center_horizontal"/>
                         <TextView
+                            android:id="@+id/scoreText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="积分 0"

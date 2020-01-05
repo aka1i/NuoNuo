@@ -31,6 +31,9 @@ class MineFragment : Fragment(), View.OnClickListener {
 
     private var phone: String by Preference(Constant.PHONE_KEY,"")
 
+    private var score: Int by Preference(Constant.SCORE_KEY,0)
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,6 +80,7 @@ class MineFragment : Fragment(), View.OnClickListener {
         val options = HeadImgUtil.getHeadImgOptions(sexual)
         Glide.with(this).load(headPicUrl).apply(options).into(head_img)
         userNameText.text = name
+        scoreText.text = "积分 $score"
     }
 
 }

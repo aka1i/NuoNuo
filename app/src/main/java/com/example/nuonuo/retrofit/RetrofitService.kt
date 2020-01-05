@@ -30,6 +30,10 @@ interface RetrofitService {
     @GET
     fun getForgotPasswordCode(@Url url:String): Deferred<LoginResponse>
 
+
+    @GET("v1/nuoUsers/info")
+    fun getMyInfo(@Header("Authorization") access_token: String): Deferred<LoginResponse>
+
     /**
      * 忘记密码
      */
@@ -116,4 +120,11 @@ interface RetrofitService {
         @Body requestBody: PhoneCallBean,
         @Header("Authorization") access_token: String
     ): Deferred<GetPhoneCallResponse>
+
+    @POST("v1/nuoUsers/plus/{id}")
+    fun dianzan(
+        @Path("id") id: Int,
+        @Header("Authorization") access_token: String
+    ): Deferred<LoginResponse>
+
 }

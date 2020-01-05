@@ -18,7 +18,8 @@ data class LoginResponse(
         var qq: String?,
         var weixin: String?,
         var headPicId: Int?,
-        var headPicUrl: String?
+        var headPicUrl: String?,
+        var score:Int
     )
 
 }

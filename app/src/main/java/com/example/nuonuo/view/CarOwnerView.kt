@@ -2,6 +2,7 @@ package com.example.nuonuo.view
 
 import android.graphics.Bitmap
 import com.example.nuonuo.bean.GetPhoneCallResponse
+import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.bean.PhoneCodeResponse
 
 /**
@@ -27,4 +28,10 @@ interface CarOwnerView {
 
     fun getCookieAndTokenFailed(errorMessage:String?)
 
+
+    fun dianzan(id:Int, accessToken: String)
+
+    fun dianzanSuccess(loginResponse: LoginResponse)
+
+    fun dianzanFailed(errorMessage: String?)
 }

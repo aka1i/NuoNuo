@@ -20,4 +20,12 @@
         <attr name="fi" format="float"/>
         <attr name="change_fi" format="float"/>
     </declare-styleable>
+
+    <declare-styleable name="WaveButton">
+        <attr name="waveSrc" format="reference" />
+        <attr name="waveColor" format="color" />
+        <attr name="progressColor" format="color" />
+        <attr name="waveMaxRadius" format="dimension" />
+        <attr name="waveMinRadius" format="dimension" />
+    </declare-styleable>
 </resources>

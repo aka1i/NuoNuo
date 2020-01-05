@@ -2,6 +2,7 @@ package com.example.nuonuo.presenter
 
 import android.graphics.Bitmap
 import com.example.nuonuo.bean.GetPhoneCallResponse
+import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.bean.PhoneCallBean
 import com.example.nuonuo.bean.PhoneCodeResponse
 
@@ -43,6 +44,16 @@ interface MessagePresenter {
         fun phoneCallSuccess(phoneCallResponse: GetPhoneCallResponse)
 
         fun phoneCallFailed(errorMessage: String?)
+    }
+
+    interface OnDianzanListener{
+
+        fun dianzan(id:Int, accessToken: String)
+
+        fun dianzanSuccess(loginResponse: LoginResponse)
+
+        fun dianzanFailed(errorMessage: String?)
+
     }
 
 }

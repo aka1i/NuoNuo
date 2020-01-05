@@ -2,6 +2,7 @@ package com.example.nuonuo.presenter
 
 import android.graphics.Bitmap
 import com.example.nuonuo.bean.GetPhoneCallResponse
+import com.example.nuonuo.bean.LoginResponse
 import com.example.nuonuo.bean.PhoneCallBean
 import com.example.nuonuo.bean.PhoneCodeResponse
 import com.example.nuonuo.model.MessageModelImpl
@@ -12,7 +13,7 @@ import com.example.nuonuo.view.CarOwnerView
 @create 2019/11/27 - 2:01
  */
 class CarOwnerPresenterImpl(private val carOwnerView: CarOwnerView): MessagePresenter.OnSendMessageListener,MessagePresenter.OnGetPhoneCookieAndTokenListener,
-    MessagePresenter.OnPhoneCallListener {
+    MessagePresenter.OnPhoneCallListener,MessagePresenter.OnDianzanListener {
 
     private val messageModelImpl: MessageModelImpl = MessageModelImpl()
 
@@ -50,5 +51,17 @@ class CarOwnerPresenterImpl(private val carOwnerView: CarOwnerView): MessagePres
 
     override fun phoneCallFailed(errorMessage: String?) {
         carOwnerView.callPhoneFailed(errorMessage)
+    }
+
+    override fun dianzan(id: Int, accessToken: String) {
+        messageModelImpl.dianzan(this,id,accessToken)
+    }
+
+    override fun dianzanSuccess(loginResponse: LoginResponse) {
+        carOwnerView.dianzanSuccess(loginResponse)
+    }
+
+    override fun dianzanFailed(errorMessage: String?) {
+        carOwnerView.dianzanFailed(errorMessage)
     }
 }

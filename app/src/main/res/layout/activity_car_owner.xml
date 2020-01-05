@@ -48,14 +48,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
-                android:text="动态0"
+                android:text="动态???"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="积分0"
+                android:text="积分???"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
 
@@ -66,25 +66,62 @@
 
     <LinearLayout
         android:id="@+id/car_owner_sign_ll"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/car_owner_top_rl"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="19dp"
         android:padding="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="签名"
             android:textColor="@color/black"
-            android:text="签名"/>
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
             android:textColor="@color/black"
-            android:layout_marginLeft="20dp"/>
+            android:visibility="gone" />
+
 
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/waveButton_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/car_owner_top_rl">
+
+
+        <com.example.nuonuo.ui.custom.WaveButton
+            android:id="@+id/waveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:padding="10dp"
+            android:layout_centerHorizontal="true"
+            app:waveSrc="@drawable/finger"
+            app:waveColor="@color/purple"
+            app:progressColor="@color/yellow"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/finger_left"
+            android:text="点赞"
+            android:layout_toRightOf="@+id/waveButton"
+            android:layout_marginLeft="5dp"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:drawablePadding="5dp"/>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/car_owner_trend_ll"
@@ -97,6 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:visibility="invisible"
             android:text="动态"/>
 
     </LinearLayout>
@@ -105,8 +143,8 @@
         android:id="@+id/car_owner_message_cv"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@+id/car_owner_trend_ll"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/waveButton_rl"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         app:cardCornerRadius="15dp">
